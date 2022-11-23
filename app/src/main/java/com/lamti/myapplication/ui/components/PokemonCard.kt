@@ -6,11 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Call
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +20,7 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.lamti.myapplication.ui.theme.BlackTransparent
 import com.lamti.myapplication.ui.theme.Green
 import com.lamti.myapplication.ui.theme.PokedexTheme
@@ -46,13 +44,19 @@ fun PokemonCard(
 ) {
     Card(
         shape = MaterialTheme.shapes.medium.copy(cornerSize),
-        modifier = modifier.height(height).clickable { onClick() },
+        modifier = modifier
+            .height(height)
+            .clickable { onClick() },
         contentColor = contentColor,
         backgroundColor = backgroundColor
     ) {
-        Column(Modifier.fillMaxSize().padding(start = 20.dp)) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(start = 20.dp)
+        ) {
             Text(
-                text = code.toUpperCase(Locale.current),
+                text = "#${code.toUpperCase(Locale.current).padStart(3, '0')}",
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(top = 8.dp, end = 16.dp),
@@ -103,15 +107,14 @@ fun PokemonCard(
                         .clip(RoundedCornerShape(90))
                         .background(WhiteTransparent),
                 )
-                Icon(
-                    imageVector = Icons.Rounded.Call,
-                    contentDescription = "",
+                AsyncImage(
+                    model = image,
+                    contentDescription = name,
                     modifier = Modifier
                         .size(90.dp)
                         .aspectRatio(1f)
                         .align(Alignment.BottomEnd)
-                        .padding(bottom = 0.dp, end = 12.dp),
-                    tint = MaterialTheme.colors.onBackground,
+                        .padding(bottom = 0.dp, end = 12.dp)
                 )
             }
         }

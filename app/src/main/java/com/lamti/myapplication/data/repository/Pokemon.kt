@@ -1,4 +1,4 @@
-package com.lamti.myapplication.ui
+package com.lamti.myapplication.data.repository
 
 data class Pokemon(
     val name: String,

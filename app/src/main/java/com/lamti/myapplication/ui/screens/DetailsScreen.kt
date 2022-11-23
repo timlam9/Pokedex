@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.lamti.myapplication.ui.Pokemon
+import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.ui.components.PokemonFAB
 import com.lamti.myapplication.ui.components.PokemonTopBar
 import com.lamti.myapplication.ui.theme.Green

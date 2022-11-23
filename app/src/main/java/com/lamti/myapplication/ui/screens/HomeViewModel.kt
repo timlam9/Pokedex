@@ -1,12 +1,11 @@
 package com.lamti.myapplication.ui.screens
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lamti.myapplication.data.PokemonRepository
+import com.lamti.myapplication.data.repository.PokemonRepository
 import com.lamti.myapplication.data.Result
 import com.lamti.myapplication.data.asResult
-import com.lamti.myapplication.ui.Pokemon
+import com.lamti.myapplication.data.repository.Pokemon
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -23,11 +22,11 @@ internal class HomeViewModel @Inject constructor(
         )
 
     private fun pokemonsUiStateStream(): Flow<HomeUiState> {
-        return pokemonRepository.getPokemonsStream()
+        return pokemonRepository.getPokemonListStream()
             .asResult()
             .map { result ->
                 when (result) {
-                    is Result.Error -> HomeUiState.Error
+                    is Result.Error -> HomeUiState.Error(result.exception?.message.toString())
                     Result.Loading -> HomeUiState.Loading
                     is Result.Success -> HomeUiState.Success(result.data)
                 }
@@ -37,6 +36,6 @@ internal class HomeViewModel @Inject constructor(
 
 sealed interface HomeUiState {
     data class Success(val pokemons: List<Pokemon>) : HomeUiState
-    object Error : HomeUiState
+    data class Error(val message: String) : HomeUiState
     object Loading : HomeUiState
 }

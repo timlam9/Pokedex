@@ -2,18 +2,18 @@ package com.lamti.myapplication.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.lamti.myapplication.ui.Pokemon
+import com.lamti.myapplication.data.repository.Pokemon
 
 @Composable
 fun PokemonGrid(pokemonList: List<Pokemon>, onPokemonClick: (code: String) -> Unit) {
     LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
+        columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp)
     ) {
         items(pokemonList) {

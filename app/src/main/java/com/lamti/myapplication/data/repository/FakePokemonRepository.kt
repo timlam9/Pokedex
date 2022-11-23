@@ -1,23 +1,15 @@
-package com.lamti.myapplication.data
+package com.lamti.myapplication.data.repository
 
-import com.lamti.myapplication.ui.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
-interface PokemonRepository {
-
-    fun getPokemonStream(code: String): Flow<Pokemon>
-
-    fun getPokemonsStream(): Flow<List<Pokemon>>
-}
-
-class FakePokemonRepository @Inject constructor(): PokemonRepository {
+class FakePokemonRepository @Inject constructor() : PokemonRepository {
     override fun getPokemonStream(code: String): Flow<Pokemon> {
         return flowOf(bulbasar)
     }
 
-    override fun getPokemonsStream(): Flow<List<Pokemon>> {
+    override fun getPokemonListStream(): Flow<List<Pokemon>> {
         return flowOf(pokemons)
     }
 

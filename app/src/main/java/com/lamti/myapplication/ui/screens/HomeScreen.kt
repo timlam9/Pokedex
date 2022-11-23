@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.lamti.myapplication.ui.Pokemon
+import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.ui.components.PokemonGrid
 
 @Composable
@@ -33,7 +33,7 @@ fun HomeScreen(
     onPokemonClick: (code: String) -> Unit,
 ) {
     when (uiState) {
-        HomeUiState.Error -> TODO()
+        is HomeUiState.Error -> TODO()
         HomeUiState.Loading -> CircularProgressIndicator()
         is HomeUiState.Success -> PokemonList(
             pokemons = uiState.pokemons,
