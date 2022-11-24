@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class FakePokemonRepository @Inject constructor() : PokemonRepository {
-    override fun getPokemonStream(code: String): Flow<Pokemon> {
+    override fun getPokemonStream(code: Int): Flow<Pokemon> {
         return flowOf(bulbasar)
     }
 
@@ -15,23 +15,23 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
 
     private val bulbasar = Pokemon(
         name = "bulbasar",
-        code = "001",
+        code = 1,
         image = "image",
         type1 = "grass",
         type2 = "poison"
     )
 
     private val pokemons = listOf(
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
-        Pokemon(name = "bulbasar", code = "#001", image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
+        Pokemon(name = "bulbasar", code = 1, image = "", type1 = "grass", type2 = "poison"),
     )
 }

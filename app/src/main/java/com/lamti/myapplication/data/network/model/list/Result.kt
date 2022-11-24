@@ -14,19 +14,14 @@ data class Result(
 
     companion object {
 
-        private const val ImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
-
         fun Result.toPokemon(): Pokemon = Pokemon(
             name = name,
             code = getCode(),
-            image = getImageUrl(),
+            image = "",
             type1 = "",
             type2 = null
         )
 
-        private fun Result.getCode(): String = url.split("/".toRegex()).dropLast(1).last()
-
-        private fun Result.getImageUrl(): String = "$ImageUrl${getCode()}.png"
-
+        private fun Result.getCode(): Int = url.split("/".toRegex()).dropLast(1).last().toInt()
     }
 }

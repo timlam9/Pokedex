@@ -7,5 +7,5 @@ interface PokemonNetworkDataSource {
 
     suspend fun getPokemonList(): NetworkPokemonList
 
-    suspend fun getPokemon(code: String): NetworkPokemon
+    suspend fun getPokemon(code: Int): NetworkPokemon
 }

@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Other(
     @SerialName("dream_world")
-    val dreamWorld: DreamWorld,
+    val dreamWorld: DreamWorld?,
     @SerialName("home")
-    val home: Home,
+    val home: Home?,
     @SerialName("official-artwork")
-    val officialArtwork: OfficialArtwork
+    val officialArtwork: OfficialArtwork?
 )

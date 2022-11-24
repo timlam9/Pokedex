@@ -49,8 +49,8 @@ data class NetworkPokemon(
 
         fun NetworkPokemon.toPokemon(): Pokemon = Pokemon(
             name = name,
-            code = id.toString(),
-            image = sprites.frontDefault,
+            code = id,
+            image = sprites.other?.officialArtwork?.frontDefault ?: "",
             type1 = types.first().type.name,
             type2 = if (types.size > 1) types[1].type.name else null
         )

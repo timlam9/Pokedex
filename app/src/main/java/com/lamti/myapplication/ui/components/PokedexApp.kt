@@ -19,7 +19,7 @@ fun PokedexApp(modifier: Modifier = Modifier, startDestination: String = homeRou
     ) {
         homeScreen(
             onNavigateToDetails = { code ->
-                navController.navigateToDetails(code)
+                navController.navigateToDetails(code.toString())
             }
         )
         detailsScreen(

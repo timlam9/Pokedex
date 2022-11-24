@@ -6,8 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Call
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -25,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
 import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.ui.components.PokemonFAB
 import com.lamti.myapplication.ui.components.PokemonTopBar
@@ -66,7 +65,12 @@ fun DetailsScreen(
         sheetPeekHeight = sheetHeight,
         sheetShape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp),
         sheetGesturesEnabled = false,
-        sheetContent = { BottomSheetContent() },
+        sheetContent = {
+            BottomSheetContent(
+                image = if (uiState is DetailsUiState.Success) uiState.pokemon.image else "",
+                name = if (uiState is DetailsUiState.Success) uiState.pokemon.name else ""
+            )
+        },
         topBar = { PokemonTopBar(onBackClick = onBackClick) },
         floatingActionButton = {
             PokemonFAB {
@@ -88,17 +92,16 @@ fun DetailsScreen(
 }
 
 @Composable
-fun BottomSheetContent() {
+fun BottomSheetContent(image: String, name: String) {
     Box(Modifier.fillMaxSize()) {
-        Icon(
-            imageVector = Icons.Rounded.Call,
-            contentDescription = "",
+        AsyncImage(
+            model = image,
+            contentDescription = name,
             modifier = Modifier
-                .size(130.dp)
+                .size(300.dp)
                 .aspectRatio(1f)
                 .align(Alignment.TopCenter)
-                .offset(y = (-100).dp),
-            tint = MaterialTheme.colors.onBackground,
+                .offset(y = (-200).dp),
         )
         Text(text = "hello", modifier = Modifier.clickable {})
     }
@@ -182,7 +185,7 @@ fun PokemonDetails(
                 }
             }
             Text(
-                text = "#${code.toUpperCase(Locale.current)}",
+                text = "#${code.toString().toUpperCase(Locale.current)}",
                 modifier = Modifier.padding(top = 8.dp, end = 16.dp),
                 style = MaterialTheme.typography.body1.copy(
                     fontSize = 18.sp,
@@ -200,15 +203,14 @@ fun PokemonDetails(
                 .clip(RoundedCornerShape(90))
                 .background(WhiteTransparent),
         )
-        Icon(
-            imageVector = Icons.Rounded.Call,
-            contentDescription = "",
+        AsyncImage(
+            model = image,
+            contentDescription = name,
             modifier = Modifier
-                .size(130.dp)
+                .size(300.dp)
                 .aspectRatio(1f)
                 .align(Alignment.BottomCenter)
-                .offset(y = -(24.5).dp),
-            tint = MaterialTheme.colors.onBackground,
+                .offset(y = (45).dp)
         )
     }
 }

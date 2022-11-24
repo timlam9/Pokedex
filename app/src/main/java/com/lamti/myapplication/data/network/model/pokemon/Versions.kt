@@ -7,19 +7,19 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Versions(
     @SerialName("generation-i")
-    val generationI: GenerationI,
+    val generationI: GenerationI?,
     @SerialName("generation-ii")
-    val generationIi: GenerationIi,
+    val generationIi: GenerationIi?,
     @SerialName("generation-iii")
-    val generationIii: GenerationIii,
+    val generationIii: GenerationIii?,
     @SerialName("generation-iv")
-    val generationIv: GenerationIv,
+    val generationIv: GenerationIv?,
     @SerialName("generation-v")
-    val generationV: GenerationV,
+    val generationV: GenerationV?,
     @SerialName("generation-vi")
-    val generationVi: GenerationVi,
+    val generationVi: GenerationVi?,
     @SerialName("generation-vii")
-    val generationVii: GenerationVii,
+    val generationVii: GenerationVii?,
     @SerialName("generation-viii")
-    val generationViii: GenerationViii
+    val generationViii: GenerationViii?
 )

@@ -3,6 +3,7 @@ package com.lamti.myapplication.data.network.api
 import com.lamti.myapplication.data.network.model.list.NetworkPokemonList
 import com.lamti.myapplication.data.network.model.pokemon.NetworkPokemon
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface RetrofitPokemonNetworkApi {
@@ -14,5 +15,5 @@ internal interface RetrofitPokemonNetworkApi {
     ): NetworkPokemonList
 
     @GET("pokemon/{id}")
-    suspend fun getPokemon(@Query("id") code: String): NetworkPokemon
+    suspend fun getPokemon(@Path("id") id: Int): NetworkPokemon
 }
