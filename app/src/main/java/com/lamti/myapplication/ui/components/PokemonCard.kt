@@ -1,5 +1,7 @@
 package com.lamti.myapplication.ui.components
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,7 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,7 +22,9 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.palette.graphics.Palette
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
 import com.lamti.myapplication.ui.theme.BlackTransparent
 import com.lamti.myapplication.ui.theme.Green
 import com.lamti.myapplication.ui.theme.PokedexTheme
@@ -42,13 +46,15 @@ fun PokemonCard(
     typeBackground: Color = WhiteTransparent,
     onClick: () -> Unit,
 ) {
+    var dominantColor by remember { mutableStateOf(backgroundColor) }
+
     Card(
         shape = MaterialTheme.shapes.medium.copy(cornerSize),
         modifier = modifier
             .height(height)
             .clickable { onClick() },
         contentColor = contentColor,
-        backgroundColor = backgroundColor
+        backgroundColor = dominantColor
     ) {
         Column(
             Modifier
@@ -114,7 +120,26 @@ fun PokemonCard(
                         .size(90.dp)
                         .aspectRatio(1f)
                         .align(Alignment.BottomEnd)
-                        .padding(bottom = 0.dp, end = 12.dp)
+                        .padding(bottom = 0.dp, end = 12.dp),
+                    onState = {
+                        when (it) {
+                            AsyncImagePainter.State.Empty -> {}
+                            is AsyncImagePainter.State.Error -> {}
+                            is AsyncImagePainter.State.Loading -> {}
+                            is AsyncImagePainter.State.Success -> {
+                                val result = it.result.drawable
+                                val bitmap = (result as BitmapDrawable).bitmap.copy(
+                                    Bitmap.Config.ARGB_8888,
+                                    true
+                                )
+                                Palette.from(bitmap).generate { palette ->
+                                    palette?.dominantSwatch?.rgb?.let { colorValue ->
+                                        dominantColor = Color(colorValue)
+                                    }
+                                }
+                            }
+                        }
+                    }
                 )
             }
         }
