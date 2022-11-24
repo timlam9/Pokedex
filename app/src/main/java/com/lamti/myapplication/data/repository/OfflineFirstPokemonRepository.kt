@@ -37,7 +37,9 @@ class OfflineFirstPokemonRepository @Inject constructor(
                         pokemonDao.insertOrIgnorePokemons(networkList.map { it.asEntity() })
                     }
             } else
-                localPokemonList.map { it.asExternalModel() }
+                localPokemonList.map {
+                    it.asExternalModel()
+                }
             emit(pokemons)
         }
     }.flowOn(Dispatchers.IO)
