@@ -6,7 +6,7 @@ import com.lamti.myapplication.ui.screens.HomeRoute
 
 const val homeRoute = "home_route"
 
-fun NavGraphBuilder.homeScreen(onNavigateToDetails: (code: Int) -> Unit) {
+fun NavGraphBuilder.homeScreen(onNavigateToDetails: (code: Int, color: Int) -> Unit) {
     composable(route = homeRoute) {
         HomeRoute(onNavigateToDetails)
     }

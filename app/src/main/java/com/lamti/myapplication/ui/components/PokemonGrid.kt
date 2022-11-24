@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.lamti.myapplication.data.repository.Pokemon
 
 @Composable
-fun PokemonGrid(pokemonList: List<Pokemon>, onPokemonClick: (code: Int) -> Unit) {
+fun PokemonGrid(pokemonList: List<Pokemon>, onPokemonClick: (code: Int, color: Int) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp)
@@ -24,7 +24,9 @@ fun PokemonGrid(pokemonList: List<Pokemon>, onPokemonClick: (code: Int) -> Unit)
                 image = it.image,
                 type1 = it.type1,
                 type2 = it.type2,
-                onClick = { onPokemonClick(it.code) }
+                onClick = { dominantColor ->
+                    onPokemonClick(it.code, dominantColor)
+                }
             )
         }
     }

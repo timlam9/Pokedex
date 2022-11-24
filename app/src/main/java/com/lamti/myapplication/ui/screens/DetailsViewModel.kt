@@ -1,5 +1,6 @@
 package com.lamti.myapplication.ui.screens
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,14 +34,17 @@ internal class DetailsViewModel @Inject constructor(
                 when (result) {
                     is Result.Error -> DetailsUiState.Error
                     Result.Loading -> DetailsUiState.Loading
-                    is Result.Success -> DetailsUiState.Success(result.data)
+                    is Result.Success -> DetailsUiState.Success(
+                        result.data,
+                        Color(detailsArgs.color.toInt())
+                    )
                 }
             }
     }
 }
 
 sealed interface DetailsUiState {
-    data class Success(val pokemon: Pokemon) : DetailsUiState
+    data class Success(val pokemon: Pokemon, val dominantColor: Color) : DetailsUiState
     object Error : DetailsUiState
     object Loading : DetailsUiState
 }

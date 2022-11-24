@@ -6,9 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,7 +25,6 @@ import coil.compose.AsyncImage
 import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.ui.components.PokemonFAB
 import com.lamti.myapplication.ui.components.PokemonTopBar
-import com.lamti.myapplication.ui.theme.Green
 import com.lamti.myapplication.ui.theme.WhiteTransparent
 import kotlinx.coroutines.launch
 
@@ -55,6 +52,12 @@ fun DetailsScreen(
     val sheetHeight = (LocalConfiguration.current.screenHeightDp / 2).dp
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
+    val defaultBackgroundColor = MaterialTheme.colors.background
+    val backgroundColor by remember(uiState) {
+        mutableStateOf(
+            if (uiState is DetailsUiState.Success) uiState.dominantColor else defaultBackgroundColor
+        )
+    }
 
     BackHandler {
         onBackClick()
@@ -71,7 +74,7 @@ fun DetailsScreen(
                 name = if (uiState is DetailsUiState.Success) uiState.pokemon.name else ""
             )
         },
-        topBar = { PokemonTopBar(onBackClick = onBackClick) },
+        topBar = { PokemonTopBar(color = backgroundColor, onBackClick = onBackClick) },
         floatingActionButton = {
             PokemonFAB {
                 coroutineScope.launch {
@@ -84,7 +87,7 @@ fun DetailsScreen(
         },
     ) {
         DetailsContent(
-            modifier,
+            modifier.background(backgroundColor),
             sheetHeight,
             uiState
         )
@@ -136,7 +139,6 @@ fun PokemonDetails(
         modifier = modifier
             .fillMaxWidth()
             .height(height)
-            .background(Green)
     ) {
         Row(
             modifier = Modifier

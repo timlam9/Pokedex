@@ -12,25 +12,28 @@ import com.lamti.myapplication.ui.screens.DetailsRoute
 
 @VisibleForTesting
 internal const val codeArg = "code"
+internal const val colorArg = "color"
 internal const val detailsRoute = "details_route"
 
-internal class DetailsArgs(val code: String) {
-    constructor(savedStateHandle: SavedStateHandle) :
-            this(checkNotNull(savedStateHandle[codeArg]) as String)
+internal class DetailsArgs(val code: String, val color: String) {
+    constructor(savedStateHandle: SavedStateHandle) : this(
+        checkNotNull(savedStateHandle[codeArg]) as String,
+        checkNotNull(savedStateHandle[colorArg]) as String
+    )
 }
 
-fun NavController.navigateToDetails(code: String) {
+fun NavController.navigateToDetails(code: String, color: Int) {
     val encodedString = Uri.encode(code)
-    this.navigate("$detailsRoute/$encodedString")
+    val encodedString2 = Uri.encode(color.toString())
+    this.navigate("$detailsRoute/$encodedString/$encodedString2")
 }
 
-fun NavGraphBuilder.detailsScreen(
-    onBackClick: () -> Unit
-) {
+fun NavGraphBuilder.detailsScreen(onBackClick: () -> Unit) {
     composable(
-        route = "$detailsRoute/{$codeArg}",
+        route = "$detailsRoute/{$codeArg}/{$colorArg}",
         arguments = listOf(
-            navArgument(codeArg) { type = NavType.StringType }
+            navArgument(codeArg) { type = NavType.StringType },
+            navArgument(colorArg) { type = NavType.StringType },
         )
     ) {
         DetailsRoute(onBackClick = onBackClick)

@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
@@ -44,7 +45,7 @@ fun PokemonCard(
     backgroundColor: Color = Green,
     typeShape: RoundedCornerShape = RoundedCornerShape(80),
     typeBackground: Color = WhiteTransparent,
-    onClick: () -> Unit,
+    onClick: (color: Int) -> Unit,
 ) {
     var dominantColor by remember { mutableStateOf(backgroundColor) }
 
@@ -52,7 +53,7 @@ fun PokemonCard(
         shape = MaterialTheme.shapes.medium.copy(cornerSize),
         modifier = modifier
             .height(height)
-            .clickable { onClick() },
+            .clickable { onClick(dominantColor.toArgb()) },
         contentColor = contentColor,
         backgroundColor = dominantColor
     ) {

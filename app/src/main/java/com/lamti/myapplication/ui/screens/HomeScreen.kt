@@ -13,7 +13,7 @@ import com.lamti.myapplication.ui.components.PokemonGrid
 
 @Composable
 internal fun HomeRoute(
-    onNavigateToDetails: (code: Int) -> Unit,
+    onNavigateToDetails: (code: Int, color: Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -30,7 +30,7 @@ internal fun HomeRoute(
 fun HomeScreen(
     uiState: HomeUiState,
     modifier: Modifier,
-    onPokemonClick: (code: Int) -> Unit,
+    onPokemonClick: (code: Int, color: Int) -> Unit,
 ) {
     when (uiState) {
         is HomeUiState.Error -> {
@@ -49,7 +49,7 @@ fun HomeScreen(
 fun PokemonList(
     modifier: Modifier = Modifier,
     pokemons: List<Pokemon>,
-    onPokemonClick: (code: Int) -> Unit,
+    onPokemonClick: (code: Int, color: Int) -> Unit,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         PokemonGrid(
