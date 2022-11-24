@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lamti.myapplication.data.Result
 import com.lamti.myapplication.data.asResult
-import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.data.repository.PokemonRepository
+import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.navigation.DetailsArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -24,7 +24,7 @@ internal class DetailsViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = DetailsUiState.Loading
+            initialValue = DetailsUiState.Loading(Color(detailsArgs.color.toInt()))
         )
 
     private fun pokemonUiStateStream(): Flow<DetailsUiState> {
@@ -33,10 +33,10 @@ internal class DetailsViewModel @Inject constructor(
             .map { result ->
                 when (result) {
                     is Result.Error -> DetailsUiState.Error
-                    Result.Loading -> DetailsUiState.Loading
+                    Result.Loading -> DetailsUiState.Loading(Color(detailsArgs.color.toInt()))
                     is Result.Success -> DetailsUiState.Success(
-                        result.data,
-                        Color(detailsArgs.color.toInt())
+                        pokemon = result.data,
+                        dominantColor = Color(detailsArgs.color.toInt())
                     )
                 }
             }
@@ -46,5 +46,5 @@ internal class DetailsViewModel @Inject constructor(
 sealed interface DetailsUiState {
     data class Success(val pokemon: Pokemon, val dominantColor: Color) : DetailsUiState
     object Error : DetailsUiState
-    object Loading : DetailsUiState
+    data class Loading(val dominantColor: Color) : DetailsUiState
 }

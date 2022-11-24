@@ -3,7 +3,7 @@ package com.lamti.myapplication.data.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.lamti.myapplication.data.repository.Pokemon
+import com.lamti.myapplication.data.repository.model.Pokemon
 
 @Entity(tableName = "pokemon")
 data class PokemonEntity(
@@ -22,5 +22,6 @@ fun PokemonEntity.asExternalModel() = Pokemon(
     code = id,
     image = imageUrl,
     type1 = type1,
-    type2 = type2
+    type2 = type2,
+    stats = emptyList()
 )

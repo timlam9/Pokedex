@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.lamti.myapplication.data.repository.Pokemon
+import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.PokemonGrid
 import com.lamti.myapplication.ui.components.PokemonLoader
 

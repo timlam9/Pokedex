@@ -1,7 +1,7 @@
 package com.lamti.myapplication.data.network.model.list
 
 import com.lamti.myapplication.data.network.model.list.Result.Companion.toPokemon
-import com.lamti.myapplication.data.repository.Pokemon
+import com.lamti.myapplication.data.repository.model.Pokemon
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

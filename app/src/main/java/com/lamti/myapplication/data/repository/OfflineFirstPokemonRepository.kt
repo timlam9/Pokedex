@@ -5,6 +5,8 @@ import com.lamti.myapplication.data.database.asExternalModel
 import com.lamti.myapplication.data.network.api.PokemonNetworkDataSource
 import com.lamti.myapplication.data.network.model.list.NetworkPokemonList.Companion.toPokemons
 import com.lamti.myapplication.data.network.model.pokemon.NetworkPokemon.Companion.toPokemon
+import com.lamti.myapplication.data.repository.model.Pokemon
+import com.lamti.myapplication.data.repository.model.asEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

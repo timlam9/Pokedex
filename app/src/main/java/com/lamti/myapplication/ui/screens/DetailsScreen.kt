@@ -1,17 +1,18 @@
 package com.lamti.myapplication.ui.screens
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.rememberBottomSheetScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,10 +28,12 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.lamti.myapplication.data.repository.Pokemon
+import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.PokemonLoader
 import com.lamti.myapplication.ui.components.PokemonTopBar
 import com.lamti.myapplication.ui.theme.WhiteTransparent
+import com.lamti.myapplication.ui.util.parseStatToAbbr
+import com.lamti.myapplication.ui.util.parseStatToColor
 
 @Composable
 internal fun DetailsRoute(
@@ -55,12 +58,6 @@ fun DetailsScreen(
 ) {
     val sheetHeight = (LocalConfiguration.current.screenHeightDp / 2).dp
     val scaffoldState = rememberBottomSheetScaffoldState()
-    val defaultBackgroundColor = MaterialTheme.colors.background
-    val backgroundColor by remember(uiState) {
-        mutableStateOf(
-            if (uiState is DetailsUiState.Success) uiState.dominantColor else defaultBackgroundColor
-        )
-    }
 
     BackHandler {
         onBackClick()
@@ -68,7 +65,7 @@ fun DetailsScreen(
 
     when (uiState) {
         DetailsUiState.Error -> Box {}
-        DetailsUiState.Loading -> PokemonLoader()
+        is DetailsUiState.Loading -> PokemonLoader(modifier.background(uiState.dominantColor))
         is DetailsUiState.Success -> {
             Box(modifier = Modifier.fillMaxSize()) {
                 BottomSheetScaffold(
@@ -77,11 +74,16 @@ fun DetailsScreen(
                     sheetShape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp),
                     sheetGesturesEnabled = false,
                     sheetContent = { BottomSheetContent(uiState.pokemon) },
-                    topBar = { PokemonTopBar(color = backgroundColor, onBackClick = onBackClick) },
+                    topBar = {
+                        PokemonTopBar(
+                            color = uiState.dominantColor,
+                            onBackClick = onBackClick
+                        )
+                    },
                 ) {
                     DetailsContent(
                         pokemon = uiState.pokemon,
-                        modifier = modifier.background(backgroundColor),
+                        modifier = modifier.background(uiState.dominantColor),
                         height = sheetHeight
                     )
                 }
@@ -96,13 +98,6 @@ fun DetailsScreen(
                 )
             }
         }
-    }
-}
-
-@Composable
-fun BottomSheetContent(pokemon: Pokemon) = with(pokemon) {
-    Box(Modifier.fillMaxSize()) {
-
     }
 }
 
@@ -197,5 +192,94 @@ fun PokemonDetails(
                 .clip(RoundedCornerShape(90))
                 .background(WhiteTransparent),
         )
+    }
+}
+
+@Composable
+fun BottomSheetContent(pokemon: Pokemon) = with(pokemon) {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(top = 50.dp, start = 20.dp, end = 20.dp)) {
+        PokemonBaseStats(pokemon = pokemon)
+    }
+}
+
+@Composable
+fun PokemonBaseStats(
+    pokemon: Pokemon,
+    animDelayPerItem: Int = 100
+) {
+    val maxBaseStat = remember {
+        pokemon.stats.maxOf { it.baseStat }
+    }
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = "Base stats:",
+            fontSize = 20.sp,
+            color = MaterialTheme.colors.onSurface
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        for (i in pokemon.stats.indices) {
+            val stat = pokemon.stats[i]
+            PokemonStat(
+                statName = parseStatToAbbr(stat),
+                statValue = stat.baseStat,
+                statMaxValue = maxBaseStat,
+                statColor = parseStatToColor(stat),
+                animDelay = i * animDelayPerItem
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+    }
+}
+
+@Composable
+fun PokemonStat(
+    statName: String,
+    statValue: Int,
+    statMaxValue: Int,
+    statColor: Color,
+    height: Dp = 28.dp,
+    animDuration: Int = 1000,
+    animDelay: Int = 0
+) {
+    var animationPlayed by remember { mutableStateOf(false) }
+    val curPercent = animateFloatAsState(
+        targetValue = if (animationPlayed) {
+            statValue / statMaxValue.toFloat()
+        } else 0f,
+        animationSpec = tween(animDuration, animDelay)
+    )
+    LaunchedEffect(Unit) { animationPlayed = true }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height)
+            .clip(CircleShape)
+            .background(if (isSystemInDarkTheme()) Color(0xFF505050) else Color.LightGray)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(curPercent.value)
+                .clip(CircleShape)
+                .background(statColor)
+                .padding(horizontal = 8.dp)
+        ) {
+            Text(
+                text = statName,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = (curPercent.value * statMaxValue).toInt().toString(),
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }

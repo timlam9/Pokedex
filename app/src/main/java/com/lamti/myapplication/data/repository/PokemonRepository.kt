@@ -1,5 +1,6 @@
 package com.lamti.myapplication.data.repository
 
+import com.lamti.myapplication.data.repository.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 interface PokemonRepository {

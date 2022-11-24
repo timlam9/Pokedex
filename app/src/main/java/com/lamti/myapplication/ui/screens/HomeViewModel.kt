@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lamti.myapplication.data.Result
 import com.lamti.myapplication.data.asResult
-import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.data.repository.PokemonRepository
+import com.lamti.myapplication.data.repository.model.Pokemon
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

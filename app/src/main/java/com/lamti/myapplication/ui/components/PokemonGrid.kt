@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.lamti.myapplication.data.repository.Pokemon
+import com.lamti.myapplication.data.repository.model.Pokemon
 
 @Composable
 fun PokemonGrid(pokemonList: List<Pokemon>, onPokemonClick: (code: Int, color: Int) -> Unit) {
