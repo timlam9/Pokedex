@@ -7,6 +7,7 @@ import com.lamti.myapplication.data.asResult
 import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.data.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -31,6 +32,7 @@ internal class HomeViewModel @Inject constructor(
                     is Result.Success -> HomeUiState.Success(result.data)
                 }
             }
+            .flowOn(Dispatchers.IO)
     }
 }
 
