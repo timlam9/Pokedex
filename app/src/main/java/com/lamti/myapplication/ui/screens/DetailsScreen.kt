@@ -260,7 +260,7 @@ fun PokemonStat(
             .fillMaxWidth()
             .height(height)
             .clip(CircleShape)
-            .background(if (isSystemInDarkTheme()) Color(0xFF505050) else Color.LightGray)
+            .background(if (isSystemInDarkTheme()) Color.Gray else Color.LightGray)
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
