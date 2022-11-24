@@ -2,11 +2,16 @@ package com.lamti.myapplication.ui.screens
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,10 +28,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.lamti.myapplication.data.repository.Pokemon
-import com.lamti.myapplication.ui.components.PokemonFAB
+import com.lamti.myapplication.ui.components.PokemonLoader
 import com.lamti.myapplication.ui.components.PokemonTopBar
 import com.lamti.myapplication.ui.theme.WhiteTransparent
-import kotlinx.coroutines.launch
 
 @Composable
 internal fun DetailsRoute(
@@ -50,7 +54,6 @@ fun DetailsScreen(
     onBackClick: () -> Unit,
 ) {
     val sheetHeight = (LocalConfiguration.current.screenHeightDp / 2).dp
-    val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
     val defaultBackgroundColor = MaterialTheme.colors.background
     val backgroundColor by remember(uiState) {
@@ -63,68 +66,57 @@ fun DetailsScreen(
         onBackClick()
     }
 
-    BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetPeekHeight = sheetHeight,
-        sheetShape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp),
-        sheetGesturesEnabled = false,
-        sheetContent = {
-            BottomSheetContent(
-                image = if (uiState is DetailsUiState.Success) uiState.pokemon.image else "",
-                name = if (uiState is DetailsUiState.Success) uiState.pokemon.name else ""
-            )
-        },
-        topBar = { PokemonTopBar(color = backgroundColor, onBackClick = onBackClick) },
-        floatingActionButton = {
-            PokemonFAB {
-                coroutineScope.launch {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = "This is your message",
-                        actionLabel = "Do something"
+    when (uiState) {
+        DetailsUiState.Error -> Box {}
+        DetailsUiState.Loading -> PokemonLoader()
+        is DetailsUiState.Success -> {
+            Box(modifier = Modifier.fillMaxSize()) {
+                BottomSheetScaffold(
+                    scaffoldState = scaffoldState,
+                    sheetPeekHeight = sheetHeight,
+                    sheetShape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp),
+                    sheetGesturesEnabled = false,
+                    sheetContent = { BottomSheetContent(uiState.pokemon) },
+                    topBar = { PokemonTopBar(color = backgroundColor, onBackClick = onBackClick) },
+                ) {
+                    DetailsContent(
+                        pokemon = uiState.pokemon,
+                        modifier = modifier.background(backgroundColor),
+                        height = sheetHeight
                     )
                 }
+                AsyncImage(
+                    model = uiState.pokemon.image,
+                    contentDescription = uiState.pokemon.name,
+                    modifier = Modifier
+                        .size(300.dp)
+                        .aspectRatio(1f)
+                        .align(Alignment.Center)
+                        .offset(y = (-100).dp),
+                )
             }
-        },
-    ) {
-        DetailsContent(
-            modifier.background(backgroundColor),
-            sheetHeight,
-            uiState
-        )
+        }
     }
 }
 
 @Composable
-fun BottomSheetContent(image: String, name: String) {
+fun BottomSheetContent(pokemon: Pokemon) = with(pokemon) {
     Box(Modifier.fillMaxSize()) {
-        AsyncImage(
-            model = image,
-            contentDescription = name,
-            modifier = Modifier
-                .size(300.dp)
-                .aspectRatio(1f)
-                .align(Alignment.TopCenter)
-                .offset(y = (-200).dp),
-        )
-        Text(text = "hello", modifier = Modifier.clickable {})
+
     }
 }
 
 @Composable
 fun DetailsContent(
+    pokemon: Pokemon,
     modifier: Modifier = Modifier,
     height: Dp,
-    uiState: DetailsUiState,
 ) {
-    when (uiState) {
-        DetailsUiState.Error -> TODO()
-        DetailsUiState.Loading -> CircularProgressIndicator()
-        is DetailsUiState.Success -> PokemonDetails(
-            modifier = modifier,
-            height = height,
-            pokemon = uiState.pokemon
-        )
-    }
+    PokemonDetails(
+        modifier = modifier,
+        height = height,
+        pokemon = pokemon
+    )
 }
 
 @Composable
@@ -187,7 +179,7 @@ fun PokemonDetails(
                 }
             }
             Text(
-                text = "#${code.toString().toUpperCase(Locale.current)}",
+                text = "#${code.toString().toUpperCase(Locale.current).padStart(3, '0')}",
                 modifier = Modifier.padding(top = 8.dp, end = 16.dp),
                 style = MaterialTheme.typography.body1.copy(
                     fontSize = 18.sp,
@@ -204,15 +196,6 @@ fun PokemonDetails(
                 .align(Alignment.BottomCenter)
                 .clip(RoundedCornerShape(90))
                 .background(WhiteTransparent),
-        )
-        AsyncImage(
-            model = image,
-            contentDescription = name,
-            modifier = Modifier
-                .size(300.dp)
-                .aspectRatio(1f)
-                .align(Alignment.BottomCenter)
-                .offset(y = (45).dp)
         )
     }
 }

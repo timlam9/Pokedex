@@ -2,7 +2,6 @@ package com.lamti.myapplication.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -10,6 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lamti.myapplication.data.repository.Pokemon
 import com.lamti.myapplication.ui.components.PokemonGrid
+import com.lamti.myapplication.ui.components.PokemonLoader
 
 @Composable
 internal fun HomeRoute(
@@ -36,7 +36,7 @@ fun HomeScreen(
         is HomeUiState.Error -> {
             println(uiState.message)
         }
-        HomeUiState.Loading -> CircularProgressIndicator()
+        HomeUiState.Loading -> PokemonLoader()
         is HomeUiState.Success -> PokemonList(
             pokemons = uiState.pokemons,
             modifier = modifier,
