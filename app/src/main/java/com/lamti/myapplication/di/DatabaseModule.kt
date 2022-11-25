@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.lamti.myapplication.data.database.PokemonDao
 import com.lamti.myapplication.data.database.PokemonDatabase
+import com.lamti.myapplication.data.database.PokemonRemoteKeysDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,5 +27,9 @@ object DatabaseModule {
     ).build()
 
     @Provides
-    fun providesAuthorDao(database: PokemonDatabase): PokemonDao = database.pokemonDao()
+    fun providesPokemonDao(database: PokemonDatabase): PokemonDao = database.pokemonDao()
+
+    @Provides
+    fun providesPokemonRemoteKeysDao(database: PokemonDatabase): PokemonRemoteKeysDao =
+        database.pokemonRemoteKeysDao()
 }

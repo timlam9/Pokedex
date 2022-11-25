@@ -1,5 +1,6 @@
 package com.lamti.myapplication.data.repository
 
+import androidx.paging.PagingData
 import com.lamti.myapplication.data.repository.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -10,8 +11,8 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
         return flowOf(bulbasar)
     }
 
-    override fun getPokemonListStream(): Flow<List<Pokemon>> {
-        return flowOf(pokemons)
+    override fun getPokemonListStream(): Flow<PagingData<Pokemon>> {
+        return flowOf(pagingData)
     }
 
     private val bulbasar = Pokemon(
@@ -113,4 +114,6 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
     )
+
+    private val pagingData: PagingData<Pokemon> = PagingData.from(pokemons)
 }

@@ -5,7 +5,7 @@ import com.lamti.myapplication.data.network.model.pokemon.NetworkPokemon
 
 interface PokemonNetworkDataSource {
 
-    suspend fun getPokemonList(): NetworkPokemonList
+    suspend fun getPokemonList(page: Int, pageSize: Int): NetworkPokemonList
 
     suspend fun getPokemon(code: Int): NetworkPokemon
 }

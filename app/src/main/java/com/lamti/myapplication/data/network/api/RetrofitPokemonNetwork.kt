@@ -35,7 +35,13 @@ class RetrofitPokemonNetwork @Inject constructor(networkJson: Json) : PokemonNet
         .build()
         .create(RetrofitPokemonNetworkApi::class.java)
 
-    override suspend fun getPokemonList(): NetworkPokemonList = networkApi.getPokemonList()
+    override suspend fun getPokemonList(
+        page: Int,
+        pageSize: Int
+    ): NetworkPokemonList = networkApi.getPokemonList(
+        offset = page,
+        limit = pageSize
+    )
 
     override suspend fun getPokemon(code: Int): NetworkPokemon = networkApi.getPokemon(code)
 }

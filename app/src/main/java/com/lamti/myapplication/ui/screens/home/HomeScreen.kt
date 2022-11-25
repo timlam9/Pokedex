@@ -1,10 +1,11 @@
 package com.lamti.myapplication.ui.screens.home
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonLoader
 import com.lamti.myapplication.ui.components.home.PokemonList
 
@@ -14,10 +15,10 @@ internal fun HomeRoute(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val uiState: HomeUiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val pokemons = viewModel.pokemons.collectAsLazyPagingItems()
 
     HomeScreen(
-        uiState = uiState,
+        pokemons = pokemons,
         modifier = modifier,
         onPokemonClick = onNavigateToDetails
     )
@@ -25,20 +26,24 @@ internal fun HomeRoute(
 
 @Composable
 fun HomeScreen(
-    uiState: HomeUiState,
+    uiState: HomeUiState? = null,
     modifier: Modifier,
     onPokemonClick: (code: Int, color: Int) -> Unit,
+    pokemons: LazyPagingItems<Pokemon>,
 ) {
     when (uiState) {
         is HomeUiState.Error -> {
             println(uiState.message)
         }
         HomeUiState.Loading -> PokemonLoader()
-        is HomeUiState.Success -> PokemonList(
-            pokemons = uiState.pokemons,
-            modifier = modifier,
-            onPokemonClick = onPokemonClick
-        )
+        is HomeUiState.Success -> {}
+        else -> {
+            PokemonList(
+                pokemons = pokemons,
+                modifier = modifier,
+                onPokemonClick = onPokemonClick
+            )
+        }
     }
 }
 

@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
@@ -26,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.palette.graphics.Palette
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
+import coil.request.ImageRequest
+import com.lamti.myapplication.R
 import com.lamti.myapplication.ui.theme.BlackTransparent
 import com.lamti.myapplication.ui.theme.Green
 import com.lamti.myapplication.ui.theme.PokedexTheme
@@ -115,7 +118,12 @@ fun PokemonCard(
                         .background(WhiteTransparent),
                 )
                 AsyncImage(
-                    model = image,
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(image)
+                        .error(R.drawable.ic_launcher_foreground)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .crossfade(true)
+                        .build(),
                     contentDescription = name,
                     modifier = Modifier
                         .size(90.dp)
