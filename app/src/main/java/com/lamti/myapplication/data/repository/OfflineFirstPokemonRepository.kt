@@ -35,7 +35,11 @@ class OfflineFirstPokemonRepository @Inject constructor(
     override fun getPokemonListStream(): Flow<PagingData<Pokemon>> {
         val pagingSourceFactory = { database.pokemonDao().getPokemonListStream() }
         return Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE),
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                prefetchDistance = PAGE_SIZE,
+                enablePlaceholders = true,
+            ),
             remoteMediator = PokemonRemoteMediator(
                 pokemonApi = pokemonApi,
                 network = network,

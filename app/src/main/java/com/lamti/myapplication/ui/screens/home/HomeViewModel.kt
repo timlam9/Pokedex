@@ -1,7 +1,9 @@
 package com.lamti.myapplication.ui.screens.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.lamti.myapplication.data.repository.PokemonRepository
 import com.lamti.myapplication.data.repository.model.Pokemon
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +15,7 @@ internal class HomeViewModel @Inject constructor(
     pokemonRepository: PokemonRepository
 ) : ViewModel() {
 
-    val pokemons = pokemonRepository.getPokemonListStream()
+    val pokemons = pokemonRepository.getPokemonListStream().cachedIn(viewModelScope)
 }
 
 sealed interface HomeUiState {

@@ -121,7 +121,6 @@ fun PokemonCard(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(image)
                         .error(R.drawable.ic_launcher_foreground)
-                        .placeholder(R.drawable.ic_launcher_background)
                         .crossfade(true)
                         .build(),
                     contentDescription = name,
