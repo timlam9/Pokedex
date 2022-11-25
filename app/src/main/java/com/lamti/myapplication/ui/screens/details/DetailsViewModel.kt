@@ -1,4 +1,4 @@
-package com.lamti.myapplication.ui.screens
+package com.lamti.myapplication.ui.screens.details
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle

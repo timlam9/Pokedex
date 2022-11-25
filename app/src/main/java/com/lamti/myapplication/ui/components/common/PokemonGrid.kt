@@ -1,4 +1,4 @@
-package com.lamti.myapplication.ui.components
+package com.lamti.myapplication.ui.components.common
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding

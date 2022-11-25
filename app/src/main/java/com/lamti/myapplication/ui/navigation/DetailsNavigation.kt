@@ -8,7 +8,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.lamti.myapplication.ui.screens.DetailsRoute
+import com.lamti.myapplication.ui.screens.details.DetailsRoute
 
 @VisibleForTesting
 internal const val codeArg = "code"

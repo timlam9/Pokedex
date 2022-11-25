@@ -1,15 +1,12 @@
-package com.lamti.myapplication.ui.screens
+package com.lamti.myapplication.ui.screens.home
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.lamti.myapplication.data.repository.model.Pokemon
-import com.lamti.myapplication.ui.components.PokemonGrid
-import com.lamti.myapplication.ui.components.PokemonLoader
+import com.lamti.myapplication.ui.components.common.PokemonLoader
+import com.lamti.myapplication.ui.components.home.PokemonList
 
 @Composable
 internal fun HomeRoute(
@@ -45,16 +42,3 @@ fun HomeScreen(
     }
 }
 
-@Composable
-fun PokemonList(
-    modifier: Modifier = Modifier,
-    pokemons: List<Pokemon>,
-    onPokemonClick: (code: Int, color: Int) -> Unit,
-) {
-    Column(modifier = modifier.fillMaxSize()) {
-        PokemonGrid(
-            pokemonList = pokemons,
-            onPokemonClick = onPokemonClick
-        )
-    }
-}

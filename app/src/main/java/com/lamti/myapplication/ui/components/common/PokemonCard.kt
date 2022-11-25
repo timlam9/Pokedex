@@ -1,4 +1,4 @@
-package com.lamti.myapplication.ui.components
+package com.lamti.myapplication.ui.components.common
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable

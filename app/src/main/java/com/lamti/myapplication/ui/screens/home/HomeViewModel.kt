@@ -1,4 +1,4 @@
-package com.lamti.myapplication.ui.screens
+package com.lamti.myapplication.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

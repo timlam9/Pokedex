@@ -2,7 +2,7 @@ package com.lamti.myapplication.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.lamti.myapplication.ui.screens.HomeRoute
+import com.lamti.myapplication.ui.screens.home.HomeRoute
 
 const val homeRoute = "home_route"
 
