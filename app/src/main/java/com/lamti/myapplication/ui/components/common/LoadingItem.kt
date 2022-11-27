@@ -16,7 +16,7 @@ fun LoadingItem(modifier: Modifier = Modifier, rotation: Float = 0f) {
     ) {
         LoadingAnimation(
             resource = R.raw.pokeball,
-            modifier = Modifier.size(100.dp),
+            size = 100.dp,
             rotation = rotation
         )
     }
