@@ -1,4 +1,4 @@
-package com.lamti.myapplication.ui.components.common
+package com.lamti.myapplication.ui.components.home
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,12 +32,13 @@ import com.lamti.myapplication.ui.theme.BlackTransparent
 import com.lamti.myapplication.ui.theme.Green
 import com.lamti.myapplication.ui.theme.PokedexTheme
 import com.lamti.myapplication.ui.theme.WhiteTransparent
+import com.lamti.myapplication.ui.util.toPokemonCode
 
 @Composable
 fun PokemonCard(
     modifier: Modifier = Modifier,
     name: String,
-    code: String,
+    code: Int,
     image: String,
     type1: String,
     type2: String?,
@@ -66,7 +66,7 @@ fun PokemonCard(
                 .padding(start = 20.dp)
         ) {
             Text(
-                text = "#${code.toUpperCase(Locale.current).padStart(3, '0')}",
+                text = code.toPokemonCode(),
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(top = 8.dp, end = 16.dp),
@@ -95,7 +95,7 @@ fun PokemonCard(
                                 .background(typeBackground)
                                 .padding(horizontal = 12.dp, vertical = 4.dp)
                         )
-                        if (type2 != null) {
+                        type2?.let {
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
                                 text = type2,
@@ -159,8 +159,8 @@ fun PokemonCard(
 fun DefaultPreview() {
     PokedexTheme {
         PokemonCard(
-            name = "Bulbasar",
-            code = "#001",
+            name = "Bulbasaur",
+            code = 1,
             image = "",
             type1 = "grass",
             type2 = "poison",

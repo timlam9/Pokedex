@@ -13,12 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.theme.WhiteTransparent
+import com.lamti.myapplication.ui.util.toPokemonCode
 
 @Composable
 fun PokemonDetails(
@@ -80,7 +80,7 @@ fun PokemonDetails(
                 }
             }
             Text(
-                text = "#${code.toString().toUpperCase(Locale.current).padStart(3, '0')}",
+                text = code.toPokemonCode(),
                 modifier = Modifier.padding(top = 8.dp, end = 16.dp),
                 style = MaterialTheme.typography.body1.copy(
                     fontSize = 18.sp,

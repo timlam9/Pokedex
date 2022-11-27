@@ -22,9 +22,7 @@ fun PokemonBaseStats(
     animationDelayPerItem: Int = 100
 ) {
     val maxBaseStat = remember { pokemon.stats.maxOf { it.baseStat } }
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = text,
             fontSize = 20.sp,

@@ -1,13 +1,9 @@
-package com.lamti.myapplication.ui.components
+package com.lamti.myapplication.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.lamti.myapplication.ui.navigation.detailsScreen
-import com.lamti.myapplication.ui.navigation.homeRoute
-import com.lamti.myapplication.ui.navigation.homeScreen
-import com.lamti.myapplication.ui.navigation.navigateToDetails
 
 @Composable
 fun PokedexApp(modifier: Modifier = Modifier, startDestination: String = homeRoute) {

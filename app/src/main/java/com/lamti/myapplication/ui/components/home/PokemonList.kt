@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 import com.lamti.myapplication.data.repository.model.Pokemon
-import com.lamti.myapplication.ui.components.common.PokemonGrid
 
 @Composable
 fun PokemonList(

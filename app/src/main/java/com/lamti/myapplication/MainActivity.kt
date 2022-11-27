@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.lamti.myapplication.ui.components.PokedexApp
+import com.lamti.myapplication.ui.navigation.PokedexApp
 import com.lamti.myapplication.ui.theme.PokedexTheme
 import dagger.hilt.android.AndroidEntryPoint
 
