@@ -2,14 +2,13 @@ package com.lamti.myapplication.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
-
-val Green = Color(0xFF017E72)
 val WhiteTransparent = Color(0x33FFFFFF)
 val BlackTransparent = Color(0x33000000)
+
+val Primary = Color(0xFF2196f3)
+val PrimaryDark = Color(0xFF0069c0)
+val PrimaryDarker = Color(0xFF0D47A1)
+val Secondary = Color(0xFFffeb3b)
 
 val HPColor = Color(0xFF4CAF50)
 val AtkColor = Color(0xFFF44336)

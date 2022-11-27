@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,7 +30,6 @@ import coil.compose.AsyncImagePainter
 import coil.request.ImageRequest
 import com.lamti.myapplication.R
 import com.lamti.myapplication.ui.theme.BlackTransparent
-import com.lamti.myapplication.ui.theme.Green
 import com.lamti.myapplication.ui.theme.PokedexTheme
 import com.lamti.myapplication.ui.theme.WhiteTransparent
 import com.lamti.myapplication.ui.util.toPokemonCode
@@ -45,7 +45,7 @@ fun PokemonCard(
     cornerSize: CornerSize = CornerSize(16),
     height: Dp = 130.dp,
     contentColor: Color = Color.White,
-    backgroundColor: Color = Green,
+    backgroundColor: Color = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray,
     typeShape: RoundedCornerShape = RoundedCornerShape(80),
     typeBackground: Color = WhiteTransparent,
     onClick: (color: Int) -> Unit,
@@ -70,10 +70,7 @@ fun PokemonCard(
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(top = 8.dp, end = 16.dp),
-                style = MaterialTheme.typography.body1.copy(
-                    fontWeight = FontWeight.Bold,
-                    color = BlackTransparent
-                ),
+                style = MaterialTheme.typography.subtitle2.copy(color = BlackTransparent),
             )
             Box(modifier = Modifier.fillMaxSize()) {
                 Row(

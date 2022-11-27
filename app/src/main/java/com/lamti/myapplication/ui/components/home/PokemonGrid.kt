@@ -56,7 +56,7 @@ private fun LazyGridScope.title(title: String) {
             text = title, modifier = Modifier
                 .height(70.dp)
                 .padding(top = 10.dp, start = 10.dp),
-            style = MaterialTheme.typography.h4.copy(fontWeight = FontWeight.ExtraBold)
+            style = MaterialTheme.typography.h2.copy(fontWeight = FontWeight.ExtraBold)
         )
     }
     item("title_end") {}

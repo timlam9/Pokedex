@@ -44,7 +44,7 @@ fun PokemonDetails(
             Column {
                 Text(
                     text = name.capitalize(Locale.current),
-                    style = MaterialTheme.typography.h4.copy(
+                    style = MaterialTheme.typography.h2.copy(
                         fontWeight = FontWeight.Bold,
                         color = Color.White
                     ),
@@ -82,10 +82,9 @@ fun PokemonDetails(
             Text(
                 text = code.toPokemonCode(),
                 modifier = Modifier.padding(top = 8.dp, end = 16.dp),
-                style = MaterialTheme.typography.body1.copy(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
+                style = MaterialTheme.typography.subtitle2.copy(
+                    color = Color.White,
+                    fontSize = 24.sp
                 ),
             )
         }
