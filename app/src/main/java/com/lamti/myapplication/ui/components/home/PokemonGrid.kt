@@ -64,6 +64,6 @@ private fun LazyGridScope.title(title: String) {
 private fun LazyGridScope.loadingItem(pokemonList: LazyPagingItems<Pokemon>) {
     if (pokemonList.loadState.append == LoadState.Loading) {
         item(key = "append_loading_start") { LoadingItem() }
-        item(key = "append_loading_end") { LoadingItem() }
+        item(key = "append_loading_end") { LoadingItem(rotation = 45f) }
     }
 }

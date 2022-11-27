@@ -8,6 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.lamti.myapplication.R
 import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonError
 import com.lamti.myapplication.ui.components.common.PokemonLoader
@@ -38,7 +39,7 @@ fun HomeScreen(
         if (pokemons.loadState.refresh is LoadState.Error && pokemons.itemCount <= 0) {
             PokemonError()
         } else if (pokemons.itemCount <= 0) {
-            PokemonLoader()
+            PokemonLoader(source = R.raw.squirtle)
         } else {
             PokemonGrid(
                 pokemonList = pokemons,
