@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lamti.myapplication.ui.components.common.PokemonError
@@ -38,7 +39,10 @@ fun DetailsScreen(
 
     when (uiState) {
         DetailsUiState.Error -> PokemonError()
-        is DetailsUiState.Loading -> PokemonLoader(modifier.background(uiState.dominantColor))
+        is DetailsUiState.Loading -> PokemonLoader(
+            modifier = modifier.background(uiState.dominantColor),
+            size = 200.dp
+        )
         is DetailsUiState.Success -> {
             with(uiState) {
                 DetailsContent(

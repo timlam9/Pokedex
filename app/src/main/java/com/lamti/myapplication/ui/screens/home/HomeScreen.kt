@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -39,7 +40,7 @@ fun HomeScreen(
         if (pokemons.loadState.refresh is LoadState.Error && pokemons.itemCount <= 0) {
             PokemonError()
         } else if (pokemons.itemCount <= 0) {
-            PokemonLoader(source = R.raw.squirtle)
+            PokemonLoader(source = R.raw.squirtle, size = 300.dp)
         } else {
             PokemonGrid(
                 pokemonList = pokemons,
