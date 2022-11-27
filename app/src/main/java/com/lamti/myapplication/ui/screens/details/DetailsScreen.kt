@@ -2,12 +2,12 @@ package com.lamti.myapplication.ui.screens.details
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.lamti.myapplication.ui.components.common.PokemonError
 import com.lamti.myapplication.ui.components.common.PokemonLoader
 import com.lamti.myapplication.ui.components.details.DetailsContent
 
@@ -37,7 +37,7 @@ fun DetailsScreen(
     }
 
     when (uiState) {
-        DetailsUiState.Error -> Box {}
+        DetailsUiState.Error -> PokemonError()
         is DetailsUiState.Loading -> PokemonLoader(modifier.background(uiState.dominantColor))
         is DetailsUiState.Success -> {
             with(uiState) {

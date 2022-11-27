@@ -3,11 +3,8 @@ package com.lamti.myapplication.ui.navigation
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.SavedStateHandle
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.lamti.myapplication.ui.screens.details.DetailsRoute
 
 @VisibleForTesting
@@ -22,10 +19,10 @@ internal class DetailsArgs(val code: String, val color: String) {
     )
 }
 
-fun NavController.navigateToDetails(code: String, color: Int) {
+fun NavController.navigateToDetails(code: String, color: Int, navOptions: NavOptions) {
     val encodedString = Uri.encode(code)
     val encodedString2 = Uri.encode(color.toString())
-    this.navigate("$detailsRoute/$encodedString/$encodedString2")
+    this.navigate("$detailsRoute/$encodedString/$encodedString2", navOptions)
 }
 
 fun NavGraphBuilder.detailsScreen(onBackClick: () -> Unit) {
