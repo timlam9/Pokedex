@@ -130,26 +130,30 @@ fun PokemonCard(
                         .align(Alignment.BottomEnd)
                         .padding(bottom = 0.dp, end = 12.dp),
                     onState = {
-                        when (it) {
-                            AsyncImagePainter.State.Empty -> {}
-                            is AsyncImagePainter.State.Error -> {}
-                            is AsyncImagePainter.State.Loading -> {}
-                            is AsyncImagePainter.State.Success -> {
-                                val result = it.result.drawable
-                                val bitmap = (result as BitmapDrawable).bitmap.copy(
-                                    Bitmap.Config.ARGB_8888,
-                                    true
-                                )
-                                Palette.from(bitmap).generate { palette ->
-                                    palette?.dominantSwatch?.rgb?.let { colorValue ->
-                                        dominantColor = Color(colorValue)
-                                    }
-                                }
+                        if (it is AsyncImagePainter.State.Success) {
+                            getDominantColor(it) { color ->
+                                dominantColor = color
                             }
                         }
                     }
                 )
             }
+        }
+    }
+}
+
+private fun getDominantColor(
+    state: AsyncImagePainter.State.Success,
+    onFinish: (Color) -> Unit
+) {
+    val result = state.result.drawable
+    val bitmap = (result as BitmapDrawable).bitmap.copy(
+        Bitmap.Config.ARGB_8888,
+        true
+    )
+    Palette.from(bitmap).generate { palette ->
+        palette?.dominantSwatch?.rgb?.let { colorValue ->
+            onFinish(Color(colorValue))
         }
     }
 }

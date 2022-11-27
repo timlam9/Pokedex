@@ -29,7 +29,6 @@ class OfflineFirstPokemonRepository @Inject constructor(
 
     override fun getPokemonStream(code: Int): Flow<Pokemon> = flow {
         emit(network.getPokemon(code).toPokemon())
-        database.pokemonDao()
     }
 
     override fun getPokemonListStream(): Flow<PagingData<Pokemon>> {
