@@ -9,6 +9,7 @@ import com.lamti.myapplication.ui.screens.details.DetailsRoute
 
 @VisibleForTesting
 internal const val codeArg = "code"
+@VisibleForTesting
 internal const val colorArg = "color"
 internal const val detailsRoute = "details_route"
 
