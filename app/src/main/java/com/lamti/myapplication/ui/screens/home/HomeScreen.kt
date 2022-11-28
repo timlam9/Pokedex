@@ -37,15 +37,15 @@ fun HomeScreen(
     onPokemonClick: (code: Int, color: Int) -> Unit,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        if (pokemons.loadState.refresh is LoadState.Error && pokemons.itemCount <= 0) {
-            PokemonError()
-        } else if (pokemons.itemCount <= 0) {
-            PokemonLoader(source = R.raw.squirtle, size = 300.dp)
-        } else {
-            PokemonGrid(
-                pokemonList = pokemons,
-                onPokemonClick = onPokemonClick
-            )
+        when {
+            pokemons.loadState.refresh is LoadState.Error && pokemons.itemCount <= 0 -> PokemonError()
+            pokemons.itemCount <= 0 -> PokemonLoader(source = R.raw.squirtle, size = 300.dp)
+            else -> {
+                PokemonGrid(
+                    pokemonList = pokemons,
+                    onPokemonClick = onPokemonClick
+                )
+            }
         }
     }
 }

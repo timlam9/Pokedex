@@ -8,15 +8,15 @@ import javax.inject.Inject
 
 class FakePokemonRepository @Inject constructor() : PokemonRepository {
     override fun getPokemonStream(code: Int): Flow<Pokemon> {
-        return flowOf(bulbasar)
+        return flowOf(bulbasaur)
     }
 
     override fun getPokemonListStream(): Flow<PagingData<Pokemon>> {
         return flowOf(pagingData)
     }
 
-    private val bulbasar = Pokemon(
-        name = "bulbasar",
+    private val bulbasaur = Pokemon(
+        name = "bulbasaur",
         code = 1,
         image = "image",
         type1 = "grass",
@@ -26,7 +26,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
 
     private val pokemons = listOf(
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -34,7 +34,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -42,7 +42,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -50,7 +50,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -58,7 +58,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -66,7 +66,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -74,7 +74,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -82,7 +82,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -90,7 +90,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -98,7 +98,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",
@@ -106,7 +106,7 @@ class FakePokemonRepository @Inject constructor() : PokemonRepository {
             stats = listOf()
         ),
         Pokemon(
-            name = "bulbasar",
+            name = "bulbasaur",
             code = 1,
             image = "",
             type1 = "grass",

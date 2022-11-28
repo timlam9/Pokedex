@@ -4,25 +4,21 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.lamti.myapplication.data.database.*
+import com.lamti.myapplication.data.database.PokemonDatabase
+import com.lamti.myapplication.data.database.PokemonEntity
+import com.lamti.myapplication.data.database.PokemonRemoteKeysEntity
 import com.lamti.myapplication.data.network.api.PokemonNetworkDataSource
-import com.lamti.myapplication.data.network.api.RetrofitPokemonNetwork
 import com.lamti.myapplication.data.network.model.list.NetworkPokemonList
 import com.lamti.myapplication.data.network.model.list.NetworkPokemonList.Companion.toPokemons
 import com.lamti.myapplication.data.network.model.pokemon.NetworkPokemon.Companion.toPokemon
 import com.lamti.myapplication.data.repository.model.asEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class PokemonRemoteMediator @Inject constructor(
-    private val pokemonApi: RetrofitPokemonNetwork,
     private val network: PokemonNetworkDataSource,
     private val database: PokemonDatabase,
-    private val pokemonDao: PokemonDao,
-    private val pokemonRemoteKeysDao: PokemonRemoteKeysDao,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : RemoteMediator<Int, PokemonEntity>() {
 
     override suspend fun load(
@@ -51,8 +47,8 @@ class PokemonRemoteMediator @Inject constructor(
                 }
             }
 
-            val pokemons: List<PokemonEntity> = withContext(Dispatchers.IO) {
-                val response: NetworkPokemonList = pokemonApi.getPokemonList(
+            val pokemons: List<PokemonEntity> = withContext(dispatcher) {
+                val response: NetworkPokemonList = network.getPokemonList(
                     page = (currentPage - 1) * PAGE_SIZE,
                     pageSize = PAGE_SIZE
                 )
@@ -69,8 +65,8 @@ class PokemonRemoteMediator @Inject constructor(
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    pokemonDao.deleteAllPokemons()
-                    pokemonRemoteKeysDao.deleteAllRemoteKeys()
+                    database.pokemonDao().deleteAllPokemons()
+                    database.pokemonRemoteKeysDao().deleteAllRemoteKeys()
                 }
                 val keys = pokemons.map {
                     PokemonRemoteKeysEntity(
@@ -80,8 +76,8 @@ class PokemonRemoteMediator @Inject constructor(
                     )
                 }
 
-                pokemonRemoteKeysDao.addAllRemoteKeys(remoteKeys = keys)
-                pokemonDao.insertOrIgnorePokemons(pokemons)
+                database.pokemonRemoteKeysDao().addAllRemoteKeys(remoteKeys = keys)
+                database.pokemonDao().insertOrIgnorePokemons(pokemons)
             }
             MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: Exception) {
@@ -94,7 +90,7 @@ class PokemonRemoteMediator @Inject constructor(
     ): PokemonRemoteKeysEntity? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
-                pokemonRemoteKeysDao.getRemoteKeys(id = id.toString())
+                database.pokemonRemoteKeysDao().getRemoteKeys(id = id.toString())
             }
         }
     }
@@ -104,7 +100,7 @@ class PokemonRemoteMediator @Inject constructor(
     ): PokemonRemoteKeysEntity? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { pokemonEntity ->
-                pokemonRemoteKeysDao.getRemoteKeys(id = pokemonEntity.id.toString())
+                database.pokemonRemoteKeysDao().getRemoteKeys(id = pokemonEntity.id.toString())
             }
     }
 
@@ -113,7 +109,7 @@ class PokemonRemoteMediator @Inject constructor(
     ): PokemonRemoteKeysEntity? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { pokemonEntity ->
-                pokemonRemoteKeysDao.getRemoteKeys(id = pokemonEntity.id.toString())
+                database.pokemonRemoteKeysDao().getRemoteKeys(id = pokemonEntity.id.toString())
             }
     }
 

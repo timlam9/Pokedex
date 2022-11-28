@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-const val PokemonBaseUrl = "https://pokeapi.co/api/v2/"
+private const val PokemonBaseUrl = "https://pokeapi.co/api/v2/"
 
 @Singleton
 class RetrofitPokemonNetwork @Inject constructor(networkJson: Json) : PokemonNetworkDataSource {
