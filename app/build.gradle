@@ -109,6 +109,9 @@ dependencies {
     implementation "com.airbnb.android:lottie-compose:5.2.0"
 
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.27.1"
+
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 }
 
 // Allow references to generated code

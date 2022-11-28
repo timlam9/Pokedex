@@ -18,7 +18,7 @@ import com.lamti.myapplication.ui.util.parseStatToColor
 @Composable
 fun PokemonBaseStats(
     pokemon: Pokemon,
-    text: String = "Base stats:",
+    text: String = "Base Stats",
     animationDelayPerItem: Int = 100
 ) {
     val maxBaseStat = remember { pokemon.stats.maxOf { it.baseStat } }
