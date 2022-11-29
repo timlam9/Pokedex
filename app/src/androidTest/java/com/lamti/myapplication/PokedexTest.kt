@@ -13,7 +13,7 @@ class PokedexTest {
     val rule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun enter() {
+    fun navigateToDetailsScreen() {
         rule.waitUntil { rule.onAllNodesWithText("Bulbasaur").fetchSemanticsNodes().isNotEmpty() }
 
         rule.onNodeWithText("Bulbasaur").performClick()

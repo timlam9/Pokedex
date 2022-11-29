@@ -78,7 +78,6 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
     // Navigation
-    def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-compose:$nav_version"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03"
 
@@ -101,7 +100,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
 
     // Paging 3
-    def paging_version = "3.1.1"
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "androidx.paging:paging-compose:1.0.0-alpha17"
     implementation "androidx.room:room-paging:$room_version"
