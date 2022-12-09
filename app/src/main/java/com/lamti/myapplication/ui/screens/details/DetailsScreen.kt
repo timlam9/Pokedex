@@ -3,55 +3,60 @@ package com.lamti.myapplication.ui.screens.details
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonError
 import com.lamti.myapplication.ui.components.common.PokemonLoader
 import com.lamti.myapplication.ui.components.details.DetailsContent
 
 @Composable
 internal fun DetailsRoute(
+    page: Int,
+    dominantColor: Color,
     onBackClick: () -> Unit,
+    onColorChange: (Color) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: DetailsViewModel = hiltViewModel(),
+    pokemons: LazyPagingItems<Pokemon>
 ) {
-    val uiState: DetailsUiState by viewModel.uiState.collectAsStateWithLifecycle()
-
     DetailsScreen(
-        uiState = uiState,
+        id = page,
+        pokemons = pokemons,
         modifier = modifier,
-        onBackClick = onBackClick,
+        dominantColor = dominantColor,
+        onColorChange = onColorChange,
+        onBackClick = onBackClick
     )
 }
 
 @Composable
 fun DetailsScreen(
-    uiState: DetailsUiState,
     modifier: Modifier,
     onBackClick: () -> Unit,
+    pokemons: LazyPagingItems<Pokemon>,
+    id: Int,
+    dominantColor: Color,
+    onColorChange: (Color) -> Unit,
 ) {
-    BackHandler {
-        onBackClick()
-    }
+    BackHandler { onBackClick() }
 
-    when (uiState) {
-        DetailsUiState.Error -> PokemonError()
-        is DetailsUiState.Loading -> PokemonLoader(
-            modifier = modifier.background(uiState.dominantColor),
+    when {
+        pokemons.loadState.refresh is LoadState.Error && pokemons.itemCount <= 0 -> PokemonError()
+        pokemons.loadState.refresh is LoadState.Loading -> PokemonLoader(
+            modifier = modifier.background(dominantColor),
             size = 200.dp
         )
-        is DetailsUiState.Success -> {
-            with(uiState) {
-                DetailsContent(
-                    pokemon = pokemon,
-                    dominantColor = dominantColor,
-                    modifier = modifier,
-                    onBackClick = onBackClick
-                )
-            }
+        else -> {
+            DetailsContent(
+                id = id,
+                modifier = modifier,
+                onBackClick = onBackClick,
+                pokemons = pokemons,
+                onColorChange = onColorChange
+            )
         }
     }
 }

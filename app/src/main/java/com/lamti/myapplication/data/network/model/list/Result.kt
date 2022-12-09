@@ -1,6 +1,7 @@
 package com.lamti.myapplication.data.network.model.list
 
 import com.lamti.myapplication.data.repository.model.Pokemon
+import com.lamti.myapplication.data.repository.model.PokemonColor
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,7 +21,8 @@ data class Result(
             image = "",
             type1 = "",
             type2 = null,
-            stats = emptyList()
+            stats = emptyList(),
+            color = PokemonColor.Ghost
         )
 
         private fun Result.getCode(): Int = url.split("/".toRegex()).dropLast(1).last().toInt()

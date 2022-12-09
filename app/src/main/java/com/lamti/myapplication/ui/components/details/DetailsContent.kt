@@ -2,7 +2,10 @@ package com.lamti.myapplication.ui.components.details
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.rememberBottomSheetScaffoldState
@@ -14,27 +17,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import androidx.paging.compose.LazyPagingItems
 import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonTopBar
 
 @Composable
 fun DetailsContent(
-    pokemon: Pokemon,
-    dominantColor: Color,
+    id: Int,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
-    imageSize: Dp = 300.dp,
-    imageOffset: Dp = (-100).dp,
-    translation: Float = 200f,
+    imageOffset: Dp = (-80).dp,
     roundedCorners: Dp = 24.dp,
+    pokemons: LazyPagingItems<Pokemon>,
+    onColorChange: (Color) -> Unit,
 ) {
     val sheetHeight = (LocalConfiguration.current.screenHeightDp / 2).dp
     val scaffoldState = rememberBottomSheetScaffoldState()
 
     var animate by remember { mutableStateOf(false) }
     val scale by animateFloatAsState(if (animate) 1f else 0f)
-    val translate by animateFloatAsState(if (animate) 0f else translation)
+
+    var currentPage by remember(id) { mutableStateOf(id) }
+    val bgColor: Color by remember(currentPage) {
+        mutableStateOf(
+            pokemons[currentPage]?.color?.value ?: Color.DarkGray
+        )
+    }
+
+    LaunchedEffect(bgColor) {
+        snapshotFlow { bgColor }.collect { color ->
+            onColorChange(color)
+        }
+    }
 
     LaunchedEffect(Unit) { animate = true }
 
@@ -49,29 +63,31 @@ fun DetailsContent(
                 bottomStart = 0.dp
             ),
             sheetGesturesEnabled = false,
-            sheetContent = { BottomSheetContent(pokemon) },
+            sheetContent = { BottomSheetContent(pokemons[currentPage]) },
             topBar = {
                 PokemonTopBar(
-                    color = dominantColor,
+                    color = bgColor,
                     onBackClick = onBackClick
                 )
             },
         ) {
             PokemonDetails(
-                pokemon = pokemon,
-                modifier = modifier.background(dominantColor),
+                pokemon = pokemons[currentPage],
+                modifier = modifier.background(bgColor),
                 height = sheetHeight
             )
         }
-        AsyncImage(
-            model = pokemon.image,
-            contentDescription = pokemon.name,
+        PokemonPager(
+            startIndex = id,
+            pokemons = pokemons,
             modifier = Modifier
-                .size(imageSize)
+                .offset(y = imageOffset)
                 .scale(scale)
                 .aspectRatio(1f)
-                .align(Alignment.Center)
-                .offset(y = translate.dp + imageOffset),
+                .align(Alignment.Center),
+            onPageChange = {
+                currentPage = it
+            }
         )
     }
 }

@@ -36,9 +36,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    PokedexApp { color ->
-                        statusBarColor = color
-                    }
+                    PokedexApp(
+                        statusBarColor = { color ->
+                            statusBarColor = color
+                        }
+                    )
                 }
             }
         }

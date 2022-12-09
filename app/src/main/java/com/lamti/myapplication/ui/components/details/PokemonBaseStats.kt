@@ -21,7 +21,9 @@ fun PokemonBaseStats(
     text: String = "Base Stats",
     animationDelayPerItem: Int = 100
 ) {
-    val maxBaseStat = remember { pokemon.stats.maxOf { it.baseStat } }
+    if (pokemon.stats.isEmpty()) return
+
+    val maxBaseStat = remember(pokemon.stats) { pokemon.stats.maxOf { it.baseStat } }
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = text,

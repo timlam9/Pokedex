@@ -2,13 +2,17 @@ package com.lamti.myapplication.ui.navigation
 
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.*
 import androidx.navigation.compose.composable
+import androidx.paging.compose.LazyPagingItems
+import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.screens.details.DetailsRoute
 
 @VisibleForTesting
 internal const val codeArg = "code"
+
 @VisibleForTesting
 internal const val colorArg = "color"
 internal const val detailsRoute = "details_route"
@@ -26,7 +30,11 @@ fun NavController.navigateToDetails(code: String, color: Int, navOptions: NavOpt
     this.navigate("$detailsRoute/$encodedString/$encodedString2", navOptions)
 }
 
-fun NavGraphBuilder.detailsScreen(onBackClick: () -> Unit) {
+fun NavGraphBuilder.detailsScreen(
+    pokemons: LazyPagingItems<Pokemon>,
+    onColorChange: (Color) -> Unit,
+    onBackClick: () -> Unit,
+) {
     composable(
         route = "$detailsRoute/{$codeArg}/{$colorArg}",
         arguments = listOf(
@@ -34,6 +42,15 @@ fun NavGraphBuilder.detailsScreen(onBackClick: () -> Unit) {
             navArgument(colorArg) { type = NavType.StringType },
         )
     ) {
-        DetailsRoute(onBackClick = onBackClick)
+        val id = (it.arguments?.getString(codeArg)?.toInt() ?: 1) - 1
+        val dominantColor = Color(it.arguments?.getString(colorArg)?.toLong() ?: 0xFF000000)
+
+        DetailsRoute(
+            page = id,
+            pokemons = pokemons,
+            onBackClick = onBackClick,
+            dominantColor = dominantColor,
+            onColorChange = onColorChange
+        )
     }
 }

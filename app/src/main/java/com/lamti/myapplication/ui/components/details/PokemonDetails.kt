@@ -24,10 +24,11 @@ import com.lamti.myapplication.ui.util.toPokemonCode
 fun PokemonDetails(
     modifier: Modifier = Modifier,
     height: Dp,
-    pokemon: Pokemon,
+    pokemon: Pokemon?,
     typeShape: RoundedCornerShape = RoundedCornerShape(80),
     typeBackground: Color = WhiteTransparent,
-) = with(pokemon) {
+) {
+    if (pokemon == null) return
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -43,7 +44,7 @@ fun PokemonDetails(
         ) {
             Column {
                 Text(
-                    text = name.capitalize(Locale.current),
+                    text = pokemon.name.capitalize(Locale.current),
                     style = MaterialTheme.typography.h2.copy(
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -53,7 +54,7 @@ fun PokemonDetails(
                 Spacer(modifier = Modifier.height(8.dp))
                 Row {
                     Text(
-                        text = type1,
+                        text = pokemon.type1,
                         style = MaterialTheme.typography.body1.copy(
                             fontSize = 14.sp,
                             color = Color.White
@@ -63,10 +64,10 @@ fun PokemonDetails(
                             .background(typeBackground)
                             .padding(horizontal = 12.dp, vertical = 4.dp)
                     )
-                    type2?.let {
+                    pokemon.type2?.let {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = type2,
+                            text = pokemon.type2,
                             style = MaterialTheme.typography.body1.copy(
                                 fontSize = 14.sp,
                                 color = Color.White
@@ -80,7 +81,7 @@ fun PokemonDetails(
                 }
             }
             Text(
-                text = code.toPokemonCode(),
+                text = pokemon.code.toPokemonCode(),
                 modifier = Modifier.padding(top = 8.dp, end = 16.dp),
                 style = MaterialTheme.typography.subtitle2.copy(
                     color = Color.White,

@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.lamti.myapplication.R
 import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonError
@@ -19,10 +17,8 @@ import com.lamti.myapplication.ui.components.home.PokemonGrid
 internal fun HomeRoute(
     onNavigateToDetails: (code: Int, color: Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel(),
+    pokemons: LazyPagingItems<Pokemon>,
 ) {
-    val pokemons = viewModel.pokemons.collectAsLazyPagingItems()
-
     HomeScreen(
         pokemons = pokemons,
         modifier = modifier,
