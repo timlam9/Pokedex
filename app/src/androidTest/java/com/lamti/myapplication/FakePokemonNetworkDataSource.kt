@@ -1,13 +1,13 @@
 package com.lamti.myapplication
 
 import android.accounts.NetworkErrorException
-import com.lamti.myapplication.data.network.api.PokemonNetworkDataSource
-import com.lamti.myapplication.data.network.model.list.NetworkPokemonList
-import com.lamti.myapplication.data.network.model.list.Result
-import com.lamti.myapplication.data.network.model.pokemon.NetworkPokemon
-import com.lamti.myapplication.data.network.model.pokemon.Sprites
-import com.lamti.myapplication.data.network.model.pokemon.Type
-import com.lamti.myapplication.data.network.model.pokemon.TypeX
+import com.lamti.pokemon.network.api.PokemonNetworkDataSource
+import com.lamti.pokemon.network.model.list.NetworkPokemonList
+import com.lamti.pokemon.network.model.list.Result
+import com.lamti.pokemon.network.model.pokemon.NetworkPokemon
+import com.lamti.pokemon.network.model.pokemon.Sprites
+import com.lamti.pokemon.network.model.pokemon.Type
+import com.lamti.pokemon.network.model.pokemon.TypeX
 
 class FakePokemonNetworkDataSource : PokemonNetworkDataSource {
 
@@ -30,7 +30,10 @@ class FakePokemonNetworkDataSource : PokemonNetworkDataSource {
 
     fun addData() {
         results = List(40) {
-            Result(name = "bulbasaur$it", url = "https://pokeapi.co/api/v2/pokemon/$it/")
+            Result(
+                name = "bulbasaur$it",
+                url = "https://pokeapi.co/api/v2/pokemon/$it/"
+            )
         }
     }
 
