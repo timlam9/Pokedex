@@ -11,13 +11,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.util.parseStatToAbbr
 import com.lamti.myapplication.ui.util.parseStatToColor
 
 @Composable
 fun PokemonBaseStats(
-    pokemon: Pokemon,
+    pokemon: com.lamti.pokemon.model.Pokemon,
     text: String = "Base Stats",
     animationDelayPerItem: Int = 100
 ) {

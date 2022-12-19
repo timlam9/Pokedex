@@ -15,13 +15,12 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
-import com.lamti.myapplication.data.repository.model.Pokemon
 import kotlin.math.absoluteValue
 
 @Composable
 fun PokemonPager(
     modifier: Modifier = Modifier,
-    pokemons: LazyPagingItems<Pokemon>,
+    pokemons: LazyPagingItems<com.lamti.pokemon.model.Pokemon>,
     startIndex: Int,
     onPageChange: (Int) -> Unit,
 ) {

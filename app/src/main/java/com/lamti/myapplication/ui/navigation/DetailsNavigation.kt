@@ -7,7 +7,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.*
 import androidx.navigation.compose.composable
 import androidx.paging.compose.LazyPagingItems
-import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.screens.details.DetailsRoute
 
 @VisibleForTesting
@@ -31,7 +30,7 @@ fun NavController.navigateToDetails(code: String, color: Int, navOptions: NavOpt
 }
 
 fun NavGraphBuilder.detailsScreen(
-    pokemons: LazyPagingItems<Pokemon>,
+    pokemons: LazyPagingItems<com.lamti.pokemon.model.Pokemon>,
     onColorChange: (Color) -> Unit,
     onBackClick: () -> Unit,
 ) {

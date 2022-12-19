@@ -18,8 +18,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonTopBar
+import com.lamti.pokemon.model.Pokemon
+import com.lamti.pokemon.model.PokemonColor
+
+private val PokemonColor?.toColorValue: Color
+    get() {
+        return Color.DarkGray
+    }
 
 @Composable
 fun DetailsContent(
@@ -40,7 +46,7 @@ fun DetailsContent(
     var currentPage by remember(id) { mutableStateOf(id) }
     val bgColor: Color by remember(currentPage) {
         mutableStateOf(
-            pokemons[currentPage]?.color?.value ?: Color.DarkGray
+            pokemons[currentPage]?.color?.toColorValue ?: Color.DarkGray
         )
     }
 

@@ -16,7 +16,6 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.theme.WhiteTransparent
 import com.lamti.myapplication.ui.util.toPokemonCode
 
@@ -24,7 +23,7 @@ import com.lamti.myapplication.ui.util.toPokemonCode
 fun PokemonDetails(
     modifier: Modifier = Modifier,
     height: Dp,
-    pokemon: Pokemon?,
+    pokemon: com.lamti.pokemon.model.Pokemon?,
     typeShape: RoundedCornerShape = RoundedCornerShape(80),
     typeBackground: Color = WhiteTransparent,
 ) {
@@ -67,7 +66,7 @@ fun PokemonDetails(
                     pokemon.type2?.let {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = pokemon.type2,
+                            text = pokemon.type2 ?: "",
                             style = MaterialTheme.typography.body1.copy(
                                 fontSize = 14.sp,
                                 color = Color.White

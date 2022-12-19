@@ -4,10 +4,7 @@ import androidx.paging.*
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.lamti.myapplication.data.database.PokemonDatabase
-import com.lamti.myapplication.data.database.PokemonEntity
-import com.lamti.myapplication.data.network.api.PokemonNetworkDataSource
-import com.lamti.myapplication.data.paging.PokemonRemoteMediator
+import com.lamti.pokemon.network.api.PokemonNetworkDataSource
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.*
@@ -20,7 +17,7 @@ class PokemonRemoteMediatorTest {
     private val network: PokemonNetworkDataSource = FakePokemonNetworkDataSource()
     private val mockDb = Room.inMemoryDatabaseBuilder(
         ApplicationProvider.getApplicationContext(),
-        PokemonDatabase::class.java
+        com.lamti.pokemon.database.PokemonDatabase::class.java
     ).build()
 
     @After
@@ -31,8 +28,9 @@ class PokemonRemoteMediatorTest {
     @Test
     fun refreshLoadReturnsSuccessResultWhenMoreDataIsPresent() = runTest {
         (network as FakePokemonNetworkDataSource).addData()
-        val remoteMediator = PokemonRemoteMediator(network = network, database = mockDb)
-        val pagingState = PagingState<Int, PokemonEntity>(
+        val remoteMediator =
+            com.lamti.pokemon.paging.PokemonRemoteMediator(network = network, database = mockDb)
+        val pagingState = PagingState<Int, com.lamti.pokemon.database.PokemonEntity>(
             pages = listOf(),
             anchorPosition = null,
             config = PagingConfig(20),
@@ -47,8 +45,9 @@ class PokemonRemoteMediatorTest {
 
     @Test
     fun refreshLoadSuccessAndEndOfPaginationWhenNoMoreData() = runTest {
-        val remoteMediator = PokemonRemoteMediator(network = network, database = mockDb)
-        val pagingState = PagingState<Int, PokemonEntity>(
+        val remoteMediator =
+            com.lamti.pokemon.paging.PokemonRemoteMediator(network = network, database = mockDb)
+        val pagingState = PagingState<Int, com.lamti.pokemon.database.PokemonEntity>(
             pages = listOf(),
             anchorPosition = null,
             config = PagingConfig(20),
@@ -64,8 +63,9 @@ class PokemonRemoteMediatorTest {
     @Test
     fun refreshLoadReturnsErrorResultWhenErrorOccurs() = runTest {
         (network as FakePokemonNetworkDataSource).failure()
-        val remoteMediator = PokemonRemoteMediator(network = network, database = mockDb)
-        val pagingState = PagingState<Int, PokemonEntity>(
+        val remoteMediator =
+            com.lamti.pokemon.paging.PokemonRemoteMediator(network = network, database = mockDb)
+        val pagingState = PagingState<Int, com.lamti.pokemon.database.PokemonEntity>(
             pages = listOf(),
             anchorPosition = null,
             config = PagingConfig(20),

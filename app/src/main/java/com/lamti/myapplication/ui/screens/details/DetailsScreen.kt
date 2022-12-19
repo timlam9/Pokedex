@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonError
 import com.lamti.myapplication.ui.components.common.PokemonLoader
 import com.lamti.myapplication.ui.components.details.DetailsContent
@@ -20,7 +19,7 @@ internal fun DetailsRoute(
     onBackClick: () -> Unit,
     onColorChange: (Color) -> Unit,
     modifier: Modifier = Modifier,
-    pokemons: LazyPagingItems<Pokemon>
+    pokemons: LazyPagingItems<com.lamti.pokemon.model.Pokemon>
 ) {
     DetailsScreen(
         id = page,
@@ -36,7 +35,7 @@ internal fun DetailsRoute(
 fun DetailsScreen(
     modifier: Modifier,
     onBackClick: () -> Unit,
-    pokemons: LazyPagingItems<Pokemon>,
+    pokemons: LazyPagingItems<com.lamti.pokemon.model.Pokemon>,
     id: Int,
     dominantColor: Color,
     onColorChange: (Color) -> Unit,

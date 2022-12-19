@@ -6,10 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.lamti.myapplication.data.repository.model.Pokemon
 
 @Composable
-fun BottomSheetContent(pokemon: Pokemon?) {
+fun BottomSheetContent(pokemon: com.lamti.pokemon.model.Pokemon?) {
     if (pokemon == null) return
     Box(
         Modifier

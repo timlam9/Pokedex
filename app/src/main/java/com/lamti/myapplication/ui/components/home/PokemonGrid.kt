@@ -15,12 +15,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.LoadingItem
 
 @Composable
 fun PokemonGrid(
-    pokemonList: LazyPagingItems<Pokemon>,
+    pokemonList: LazyPagingItems<com.lamti.pokemon.model.Pokemon>,
     modifier: Modifier = Modifier,
     title: String = "Pokedex",
     onPokemonClick: (code: Int, color: Int) -> Unit
@@ -62,7 +61,7 @@ private fun LazyGridScope.title(title: String) {
     item("title_end") {}
 }
 
-private fun LazyGridScope.loadingItem(pokemonList: LazyPagingItems<Pokemon>) {
+private fun LazyGridScope.loadingItem(pokemonList: LazyPagingItems<com.lamti.pokemon.model.Pokemon>) {
     if (pokemonList.loadState.append == LoadState.Loading) {
         item(key = "append_loading_start") { LoadingItem() }
         item(key = "append_loading_end") { LoadingItem(rotation = 45f) }

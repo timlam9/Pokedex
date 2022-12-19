@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.lamti.myapplication.R
-import com.lamti.myapplication.data.repository.model.Pokemon
 import com.lamti.myapplication.ui.components.common.PokemonError
 import com.lamti.myapplication.ui.components.common.PokemonLoader
 import com.lamti.myapplication.ui.components.home.PokemonGrid
@@ -17,7 +16,7 @@ import com.lamti.myapplication.ui.components.home.PokemonGrid
 internal fun HomeRoute(
     onNavigateToDetails: (code: Int, color: Int) -> Unit,
     modifier: Modifier = Modifier,
-    pokemons: LazyPagingItems<Pokemon>,
+    pokemons: LazyPagingItems<com.lamti.pokemon.model.Pokemon>,
 ) {
     HomeScreen(
         pokemons = pokemons,
@@ -28,7 +27,7 @@ internal fun HomeRoute(
 
 @Composable
 fun HomeScreen(
-    pokemons: LazyPagingItems<Pokemon>,
+    pokemons: LazyPagingItems<com.lamti.pokemon.model.Pokemon>,
     modifier: Modifier,
     onPokemonClick: (code: Int, color: Int) -> Unit,
 ) {
