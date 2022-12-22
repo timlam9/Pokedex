@@ -42,6 +42,6 @@ fun String.toPokemonColor(): PokemonColor = when {
     this.equals(PokemonColor.Grass.name, true) -> PokemonColor.Grass
     this.equals(PokemonColor.Electric.name, true) -> PokemonColor.Electric
     this.equals(PokemonColor.Poison.name, true) -> PokemonColor.Poison
-    else -> PokemonColor.Ghost
+    else -> PokemonColor.Normal
 }
 
