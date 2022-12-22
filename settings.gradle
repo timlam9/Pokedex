@@ -16,3 +16,5 @@ rootProject.name = "Pokedex"
 include ':app'
 include ':data'
 include ':data:pokemon'
+include ':feature'
+include ':feature:pokemonList'

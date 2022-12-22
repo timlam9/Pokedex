@@ -10,7 +10,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.lamti.myapplication.ui.screens.home.HomeViewModel
+import com.lamti.pokemonlist.navigation.detailsScreen
+import com.lamti.pokemonlist.navigation.homeRoute
+import com.lamti.pokemonlist.navigation.homeScreen
+import com.lamti.pokemonlist.navigation.navigateToDetails
+import com.lamti.pokemonlist.screens.home.HomeViewModel
 
 @Composable
 internal fun PokedexApp(
