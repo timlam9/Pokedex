@@ -46,6 +46,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="574597144">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Google Pixel 2 XL" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="1115807955">
           <value>
             <AndroidTestResultsTableState>
@@ -82,6 +95,7 @@
                   <entry key="711KPLC0637488" value="120" />
                   <entry key="Duration" value="90" />
                   <entry key="Google&#10; Pixel 2 XL" value="120" />
+                  <entry key="Google Pixel 2 XL" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
