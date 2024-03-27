@@ -1,24 +1,24 @@
 package com.lamti.myapplication.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColors(
+private val DarkColorPalette = darkColorScheme(
     primary = Primary,
-    primaryVariant = PrimaryDark,
-    secondary = Secondary,
+    secondary = PrimaryDark,
+    tertiary = Secondary,
     background = Color.Black,
     onBackground = Color.White,
 )
 
-private val LightColorPalette = lightColors(
+private val LightColorPalette = lightColorScheme(
     primary = PrimaryDark,
-    primaryVariant = PrimaryDarker,
-    secondary = Secondary,
+    secondary = PrimaryDarker,
+    tertiary = Secondary,
     background = Color.White,
     onBackground = Color.Black,
 )
@@ -32,7 +32,7 @@ fun PokedexTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
     }
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = colors,
         typography = Typography,
         shapes = Shapes,
         content = content

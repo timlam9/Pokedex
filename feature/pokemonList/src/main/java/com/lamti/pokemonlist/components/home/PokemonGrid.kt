@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +55,7 @@ private fun LazyGridScope.title(title: String) {
             text = title, modifier = Modifier
                 .height(70.dp)
                 .padding(top = 10.dp, start = 10.dp),
-            style = MaterialTheme.typography.h2.copy(fontWeight = FontWeight.ExtraBold)
+            style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.ExtraBold)
         )
     }
     item("title_end") {}

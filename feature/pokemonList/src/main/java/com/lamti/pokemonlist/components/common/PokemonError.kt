@@ -3,8 +3,8 @@ package com.lamti.pokemonlist.components.common
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,8 +22,8 @@ fun PokemonError(modifier: Modifier = Modifier) {
         LoadingAnimation(resource = R.raw.connection_lost, size = 300.dp)
         Text(
             text = "Something went wrong.\nCheck your internet connection!",
-            style = MaterialTheme.typography.h6.copy(
-                color = MaterialTheme.colors.primary,
+            style = MaterialTheme.typography.titleLarge.copy(
+                color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center
             )
         )

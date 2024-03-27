@@ -7,9 +7,17 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.rememberBottomSheetScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -22,7 +30,7 @@ import com.lamti.pokemon.model.Pokemon
 import com.lamti.pokemonlist.components.common.PokemonTopBar
 import com.lamti.pokemonlist.toColor
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsContent(
     id: Int,
@@ -37,9 +45,9 @@ fun DetailsContent(
     val scaffoldState = rememberBottomSheetScaffoldState()
 
     var animate by remember { mutableStateOf(false) }
-    val scale by animateFloatAsState(if (animate) 1f else 0f)
+    val scale by animateFloatAsState(if (animate) 1f else 0f, label = "animate scale")
 
-    var currentPage by remember(id) { mutableStateOf(id) }
+    var currentPage by remember(id) { mutableIntStateOf(id) }
     val bgColor: Color by remember(currentPage) {
         mutableStateOf(
             pokemons[currentPage]?.color?.toColor() ?: Color.DarkGray
@@ -56,6 +64,7 @@ fun DetailsContent(
 
     Box(modifier = Modifier.fillMaxSize()) {
         BottomSheetScaffold(
+            sheetShadowElevation = 0.dp,
             scaffoldState = scaffoldState,
             sheetPeekHeight = sheetHeight,
             sheetShape = RoundedCornerShape(
@@ -64,7 +73,6 @@ fun DetailsContent(
                 bottomEnd = 0.dp,
                 bottomStart = 0.dp
             ),
-            sheetGesturesEnabled = false,
             sheetContent = { BottomSheetContent(pokemons[currentPage]) },
             topBar = {
                 PokemonTopBar(
@@ -72,6 +80,8 @@ fun DetailsContent(
                     onBackClick = onBackClick
                 )
             },
+            sheetDragHandle = null,
+            sheetSwipeEnabled = false,
         ) {
             PokemonDetails(
                 pokemon = pokemons[currentPage],

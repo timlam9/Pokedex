@@ -6,8 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,7 +55,7 @@ fun PokemonStat(
         ) {
             Text(
                 text = statName,
-                style = MaterialTheme.typography.body1.copy(
+                style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Light,
                     color = Color.White,
                     fontSize = 14.sp,
@@ -63,7 +63,7 @@ fun PokemonStat(
             )
             Text(
                 text = (animatedWidth * statMaxValue).toInt().toString(),
-                style = MaterialTheme.typography.subtitle2.copy(color = Color.White)
+                style = MaterialTheme.typography.titleSmall.copy(color = Color.White)
             )
         }
     }

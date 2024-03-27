@@ -1,6 +1,6 @@
 package com.lamti.myapplication.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -13,22 +13,22 @@ val mondayFeelingsFont: FontFamily = FontFamily(Font(R.font.monday_feelings))
 val sparkyStonesFont: FontFamily = FontFamily(Font(R.font.sparky_stones))
 
 val Typography = Typography(
-    body1 = TextStyle(
+    bodyLarge = TextStyle(
         fontFamily = mondayFeelingsFont,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
-    subtitle1 = TextStyle(
+    titleMedium = TextStyle(
         fontFamily = mondayFeelingsFont,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     ),
-    subtitle2 = TextStyle(
+    titleSmall = TextStyle(
         fontFamily = sparkyStonesFont,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
-    h2 = TextStyle(
+    displayMedium = TextStyle(
         fontFamily = pokemonFont,
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,

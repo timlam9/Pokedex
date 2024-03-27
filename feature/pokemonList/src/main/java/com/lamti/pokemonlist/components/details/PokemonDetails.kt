@@ -3,8 +3,8 @@ package com.lamti.pokemonlist.components.details
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +44,7 @@ fun PokemonDetails(
             Column {
                 Text(
                     text = pokemon.name.capitalize(Locale.current),
-                    style = MaterialTheme.typography.h2.copy(
+                    style = MaterialTheme.typography.displayMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = Color.White
                     ),
@@ -54,7 +54,7 @@ fun PokemonDetails(
                 Row {
                     Text(
                         text = pokemon.type1,
-                        style = MaterialTheme.typography.body1.copy(
+                        style = MaterialTheme.typography.bodyLarge.copy(
                             fontSize = 14.sp,
                             color = Color.White
                         ),
@@ -67,7 +67,7 @@ fun PokemonDetails(
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = pokemon.type2 ?: "",
-                            style = MaterialTheme.typography.body1.copy(
+                            style = MaterialTheme.typography.bodyLarge.copy(
                                 fontSize = 14.sp,
                                 color = Color.White
                             ),
@@ -82,7 +82,7 @@ fun PokemonDetails(
             Text(
                 text = pokemon.code.toPokemonCode(),
                 modifier = Modifier.padding(top = 8.dp, end = 16.dp),
-                style = MaterialTheme.typography.subtitle2.copy(
+                style = MaterialTheme.typography.titleSmall.copy(
                     color = Color.White,
                     fontSize = 24.sp
                 ),

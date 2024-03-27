@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
             PokedexTheme {
                 val systemUiController = rememberSystemUiController()
                 val useDarkIcons = !isSystemInDarkTheme()
-                val initialColor = MaterialTheme.colors.background
+                val initialColor = MaterialTheme.colorScheme.background
                 var statusBarColor by remember { mutableStateOf(initialColor) }
 
                 DisposableEffect(systemUiController, useDarkIcons, statusBarColor) {
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                 }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     PokedexApp(
                         statusBarColor = { color ->

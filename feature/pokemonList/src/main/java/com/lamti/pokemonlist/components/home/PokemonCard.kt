@@ -5,13 +5,28 @@ import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -55,8 +70,10 @@ fun PokemonCard(
         modifier = modifier
             .height(height)
             .clickable { onClick(dominantColor.toArgb()) },
-        contentColor = contentColor,
-        backgroundColor = dominantColor
+        colors = CardDefaults.cardColors().copy(
+            containerColor = dominantColor,
+            contentColor = contentColor,
+        ),
     ) {
         Column(
             Modifier
@@ -68,7 +85,7 @@ fun PokemonCard(
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(top = 8.dp, end = 16.dp),
-                style = MaterialTheme.typography.subtitle2.copy(color = BlackTransparent),
+                style = MaterialTheme.typography.titleSmall.copy(color = BlackTransparent),
             )
             Box(modifier = Modifier.fillMaxSize()) {
                 Row(
@@ -78,13 +95,13 @@ fun PokemonCard(
                     Column {
                         Text(
                             text = name.capitalize(Locale.current),
-                            style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
+                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                             modifier = Modifier
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = type1,
-                            style = MaterialTheme.typography.subtitle1,
+                            style = MaterialTheme.typography.titleMedium,
                             modifier = Modifier
                                 .clip(typeShape)
                                 .background(typeBackground)
@@ -94,7 +111,7 @@ fun PokemonCard(
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
                                 text = type2,
-                                style = MaterialTheme.typography.subtitle1,
+                                style = MaterialTheme.typography.titleMedium,
                                 modifier = Modifier
                                     .clip(typeShape)
                                     .background(typeBackground)

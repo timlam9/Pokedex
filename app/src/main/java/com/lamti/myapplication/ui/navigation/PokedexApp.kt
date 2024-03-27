@@ -1,6 +1,6 @@
 package com.lamti.myapplication.ui.navigation
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +24,7 @@ internal fun PokedexApp(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val navController = rememberNavController()
-    val initialColor = MaterialTheme.colors.background
+    val initialColor = MaterialTheme.colorScheme.background
     val pokemons = viewModel.pokemons.collectAsLazyPagingItems()
 
     NavHost(
