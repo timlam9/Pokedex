@@ -2,23 +2,26 @@
 agp = "8.3.0"
 kotlin = "1.9.0"
 koinBom = "3.6.0-wasm-alpha2"
-room = "2.6.1"
 ksp = "1.9.21-1.0.15"
-serializationPlugin = "1.8.10"
+lifecycleRuntimeCompose = "2.6.0-alpha03"
 navigationCompose = "2.7.7"
+paging = "3.1.1"
+pagingCompose = "1.0.0-alpha17"
+room = "2.4.3"
+serializationPlugin = "1.8.10"
 
 [libraries]
-koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koinBom" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "pagingCompose" }
 koin-android = { group = "io.insert-koin", name = "koin-android" }
-koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
-koin = { group = "io.insert-koin", name = "koin-core" }
-
-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koinBom" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
-
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
 
 [bundles]
@@ -27,5 +30,5 @@ room = ["room-ktx", "room-paging", "room-runtime"]
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationPlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationPlugin" }

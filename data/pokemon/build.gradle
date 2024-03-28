@@ -59,20 +59,17 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 
     // Room
-    ksp "androidx.room:room-compiler:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
+    implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
 
     // Gson
     implementation 'com.google.code.gson:gson:2.10.1'
 
     // Paging 3
-    implementation "androidx.paging:paging-runtime:$paging_version"
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
-    implementation "androidx.room:room-paging:$room_version"
+    implementation(libs.androidx.paging)
+    implementation(libs.androidx.paging.compose)
 
+    // Koin
     implementation(platform(libs.koin.bom))
-    implementation(libs.koin)
     implementation(libs.koin.android)
 }

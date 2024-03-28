@@ -70,7 +70,6 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation "androidx.compose.material3:material3:1.2.1"
-    implementation 'androidx.room:room-ktx:2.6.1'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.7.20"
@@ -80,18 +79,18 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
-    // Navigation
-    implementation "androidx.navigation:navigation-compose:$nav_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03"
-
-    // Paging 3
-    implementation "androidx.paging:paging-runtime:$paging_version"
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
-    implementation "androidx.room:room-paging:$room_version"
-
     // UI
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.27.1"
 
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    // Paging 3
+    implementation(libs.androidx.paging)
+    implementation(libs.androidx.paging.compose)
+
+    // Koin
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
