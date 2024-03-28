@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'org.jetbrains.kotlin.plugin.serialization'
-    id 'com.google.devtools.ksp'
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -57,14 +57,13 @@ android {
 
 dependencies {
 
-    implementation project(':data:pokemon')
+    implementation(project(":data:pokemon"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.tooling.preview)
     androidTestImplementation(libs.androidx.junit)
-
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
 
     // UI
     implementation "com.airbnb.android:lottie-compose:5.2.0"

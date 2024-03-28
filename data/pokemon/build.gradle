@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'org.jetbrains.kotlin.plugin.serialization'
-    id 'com.google.devtools.ksp'
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -49,18 +49,18 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
+    implementation(libs.serialization)
 
     // Room
     implementation(libs.bundles.room)
     ksp(libs.room.compiler)
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation(libs.gson)
 
     // Paging 3
     implementation(libs.androidx.paging)
