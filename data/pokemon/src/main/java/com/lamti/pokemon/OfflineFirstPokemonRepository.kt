@@ -13,9 +13,8 @@ import com.lamti.pokemon.paging.PokemonRemoteMediator.Companion.PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-class OfflineFirstPokemonRepository @Inject constructor(
+class OfflineFirstPokemonRepository(
     private val network: PokemonNetworkDataSource,
     private val database: com.lamti.pokemon.database.PokemonDatabase,
 ) : PokemonRepository {

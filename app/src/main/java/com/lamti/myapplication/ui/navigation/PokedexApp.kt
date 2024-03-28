@@ -4,7 +4,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -15,13 +14,14 @@ import com.lamti.pokemonlist.navigation.homeRoute
 import com.lamti.pokemonlist.navigation.homeScreen
 import com.lamti.pokemonlist.navigation.navigateToDetails
 import com.lamti.pokemonlist.screens.home.HomeViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun PokedexApp(
     modifier: Modifier = Modifier,
     startDestination: String = homeRoute,
     statusBarColor: (Color) -> Unit,
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = koinViewModel(),
 ) {
     val navController = rememberNavController()
     val initialColor = MaterialTheme.colorScheme.background

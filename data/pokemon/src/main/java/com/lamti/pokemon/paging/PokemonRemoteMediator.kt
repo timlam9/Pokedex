@@ -9,10 +9,13 @@ import com.lamti.pokemon.network.api.PokemonNetworkDataSource
 import com.lamti.pokemon.network.model.list.NetworkPokemonList
 import com.lamti.pokemon.network.model.list.NetworkPokemonList.Companion.toPokemons
 import com.lamti.pokemon.network.model.pokemon.NetworkPokemon.Companion.toPokemon
-import kotlinx.coroutines.*
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 
-class PokemonRemoteMediator @Inject constructor(
+class PokemonRemoteMediator(
     private val network: PokemonNetworkDataSource,
     private val database: com.lamti.pokemon.database.PokemonDatabase,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -28,6 +31,7 @@ class PokemonRemoteMediator @Inject constructor(
                     val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
                     remoteKeys?.nextPage?.minus(1) ?: 1
                 }
+
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeyForFirstItem(state)
                     val prevPage = remoteKeys?.prevPage ?: return MediatorResult.Success(
@@ -35,6 +39,7 @@ class PokemonRemoteMediator @Inject constructor(
                     )
                     prevPage
                 }
+
                 LoadType.APPEND -> {
                     val remoteKeys = getRemoteKeyForLastItem(state)
                     val nextPage = remoteKeys?.nextPage ?: return MediatorResult.Success(

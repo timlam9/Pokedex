@@ -4,9 +4,8 @@ import androidx.paging.PagingData
 import com.lamti.pokemon.model.PokemonColor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import javax.inject.Inject
 
-class FakePokemonRepository @Inject constructor() : com.lamti.pokemon.PokemonRepository {
+class FakePokemonRepository() : com.lamti.pokemon.PokemonRepository {
 
     override fun getPokemonStream(code: Int): Flow<com.lamti.pokemon.model.Pokemon> {
         return flowOf(bulbasaur)

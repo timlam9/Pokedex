@@ -1,6 +1,6 @@
 <h1 align="center">Pokedex</h1>
 <p align="center">  
-Pokedex demonstrates modern Android development with Hilt, Coroutines, Flow, Jetpack (Compose, Room, ViewModel), Paging3 and Material Design based on MVVM architecture.
+Pokedex demonstrates modern Android development with Koin, Coroutines, Flow, Jetpack (Compose, Room, ViewModel), Paging3 and Material Design based on MVVM architecture.
 
 <p align="center">
 <img src="/previews/pokedex.jpg"/>
@@ -21,7 +21,7 @@ Pokedex demonstrates modern Android development with Hilt, Coroutines, Flow, Jet
     over network.
   - Room: Constructs Database by providing an abstraction layer over SQLite to allow fluent database
     access.
-  - [Hilt](https://dagger.dev/hilt/): for dependency injection.
+  - [Koin](https://insert-koin.io/): for dependency injection.
   - Navigation: Navigation refers to the interactions that allow users to navigate across, into, and
     back out from the different pieces of content within your app.
 - Architecture
