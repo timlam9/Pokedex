@@ -1,7 +1,10 @@
 [versions]
+accompanistPagerIndicators = "0.28.0"
+accompanistPager = "0.28.0"
 accompanistSystemuicontroller = "0.27.1"
 activityCompose = "1.8.2"
 agp = "8.3.0"
+coilCompose = "2.2.2"
 composeBom = "2024.02.02"
 coreKtx = "1.12.0"
 espressoCore = "3.5.0"
@@ -12,18 +15,23 @@ koinBom = "3.6.0-wasm-alpha2"
 ksp = "1.9.21-1.0.15"
 lifecycleRuntimeCompose = "2.6.0-alpha03"
 lifecycleRuntimeKtx = "2.7.0"
+lottieCompose = "5.2.0"
 material3 = "1.2.1"
 navigationCompose = "2.7.7"
 okhttp = "4.10.0"
 paging = "3.1.1"
 pagingCompose = "1.0.0-alpha17"
+paletteKtx = "1.0.0"
 retrofit = "2.9.0"
 room = "2.4.3"
 serialization = "1.4.1"
 serializationConverter = "0.8.0"
 serializationPlugin = "1.8.10"
+uiUtil = "1.6.4"
 
 [libraries]
+accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanistPagerIndicators" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -36,16 +44,20 @@ androidx-material3 = { module = "androidx.compose.material3:material3", version.
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "pagingCompose" }
+androidx-palette-ktx = { module = "androidx.palette:palette-ktx", version.ref = "paletteKtx" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "uiUtil" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 koin-android = { group = "io.insert-koin", name = "koin-android" }
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koinBom" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
