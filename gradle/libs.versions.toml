@@ -28,6 +28,7 @@ serialization = "1.4.1"
 serializationConverter = "0.8.0"
 serializationPlugin = "1.8.10"
 uiUtil = "1.6.4"
+roomKtx = "2.6.1"
 
 [libraries]
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanistPagerIndicators" }
@@ -67,6 +68,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [bundles]
 room = ["room-ktx", "room-paging", "room-runtime"]

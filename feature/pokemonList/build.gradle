@@ -59,31 +59,21 @@ dependencies {
 
     implementation(project(":data:pokemon"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.tooling.preview)
-    androidTestImplementation(libs.androidx.junit)
-
-    // UI
-    implementation(libs.lottie.compose)
-    implementation(libs.androidx.palette.ktx)
-    implementation(libs.coil.compose)
-    implementation(libs.accompanist.systemuicontroller)
-
-    // UI Pager
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
-    implementation(libs.androidx.ui.util)
-
-    // Navigation
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-
-    // Paging 3
     implementation(libs.androidx.paging)
     implementation(libs.androidx.paging.compose)
-
-    // Koin
-    implementation(platform(libs.koin.bom))
+    implementation(libs.androidx.palette.ktx)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.ui.util)
+    implementation(libs.coil.compose)
     implementation(libs.koin.android)
+    implementation(libs.lottie.compose)
+    implementation(platform(libs.koin.bom))
+    androidTestImplementation(libs.androidx.junit)
 }
